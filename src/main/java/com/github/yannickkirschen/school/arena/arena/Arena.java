@@ -1,21 +1,13 @@
 package com.github.yannickkirschen.school.arena.arena;
 
 import com.github.yannickkirschen.school.arena.fighter.Fighter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Random;
 
 public final class Arena {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Arena.class);
-
     private Arena() {}
 
-    public static void fight(Fighter attacker, Fighter enemy, String skill, boolean chooseDefense) {
-        if (chooseDefense) {
-            LOGGER.info("The defense is currently generated automatically");
-        }
-
+    public static String attack(Fighter attacker, Fighter enemy, String skill) {
         Integer defenseStrength;
         Integer size = enemy.getDefenses().size();
         if (size > 0) {
@@ -33,8 +25,35 @@ public final class Arena {
 
         if (result > 0) {
             enemy.reduceHealth(Math.abs(result));
+            return attacker.getName();
         } else {
             attacker.reduceHealth(Math.abs(result));
+            return enemy.getName();
+        }
+    }
+
+    public static String defense(Fighter defender, Fighter attacker, String defense) {
+        Integer attackStrength;
+        Integer size = attacker.getDefenses().size();
+        if (size > 0) {
+            String attack = attacker.getSkillKeys().get(new Random().nextInt(attacker.getSkills().size()));
+            attackStrength = attacker.getSkills().get(attack);
+        } else {
+            attackStrength = 0;
+        }
+
+        Integer defenseStrength = defender.getDefenses().get(defense);
+        Integer defenderPower = defender.getPower();
+        Integer attackerPower = attacker.getPower();
+
+        Integer result = attackStrength - defenseStrength + attackerPower - defenderPower;
+
+        if (result > 0) {
+            attacker.reduceHealth(Math.abs(result));
+            return defender.getName();
+        } else {
+            defender.reduceHealth(Math.abs(result));
+            return attacker.getName();
         }
     }
 }

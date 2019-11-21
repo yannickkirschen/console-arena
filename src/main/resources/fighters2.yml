@@ -1,0 +1,29 @@
+fighters:
+    -   name: "Vader"
+        skills:
+            -   name: "punch"
+                strength: 1
+                type: "ATTACK"
+            -   name: "kick"
+                strength: 2
+                type: "ATTACK"
+            -   name: "shield"
+                strength: 2
+                type: "DEFENSE"
+            -   name: "run away"
+                strength: 1
+                type: "DEFENSE"
+    -   name: "Yoda"
+        skills:
+            -   name: "punch"
+                strength: 1
+                type: "ATTACK"
+            -   name: "kick"
+                strength: 2
+                type: "ATTACK"
+            -   name: "shield"
+                strength: 2
+                type: "DEFENSE"
+            -   name: "run away"
+                strength: 1
+                type: "DEFENSE"

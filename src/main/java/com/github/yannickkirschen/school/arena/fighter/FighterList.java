@@ -19,15 +19,31 @@ public class FighterList {
         return null;
     }
 
-    public List<Fighter> getFighters() { return fighters; }
+    public Fighter get(Integer id) { return fighters.get(id); }
+
+    public Fighter getAndRemove(Integer id) {
+        Fighter fighter = fighters.get(id);
+        fighters.remove(fighter);
+        return fighter;
+    }
+
+    public Integer length() { return fighters.size(); }
 
     public void setFighters(List<Fighter> fighters) { this.fighters = fighters; }
 
     @Override
     public String toString() {
-        return "FighterList{" +
-            "fighters=" + fighters +
-            '}';
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("These are the available fighters:");
+        sb.append("\n");
+
+        for (int i = 0; i < fighters.size(); i++) {
+            Fighter fighter = fighters.get(i);
+            sb.append("\n").append(i).append(" - ").append(fighter.getName()).append(" - Power: ").append(fighter.getPower());
+        }
+
+        return sb.append("\n").toString();
     }
 
     @Override
@@ -39,7 +55,5 @@ public class FighterList {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(fighters);
-    }
+    public int hashCode() { return Objects.hash(fighters); }
 }

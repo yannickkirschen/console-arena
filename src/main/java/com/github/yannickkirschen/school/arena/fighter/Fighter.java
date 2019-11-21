@@ -11,6 +11,9 @@ public class Fighter {
     private Map<String, Integer> defenses;
     private Integer power;
 
+    private List<String> skillList;
+    private List<String> defenseList;
+
     private Integer health = 100;
 
     public Fighter() {
@@ -25,10 +28,18 @@ public class Fighter {
         this.health = health;
     }
 
+    public List<String> getSkillKeys() {
+        if (skillList == null) {
+            skillList = new ArrayList<>(skills.keySet());
+        }
+        return skillList;
+    }
+
     public List<String> getDefenseKeys() {
-        List<String> keys = new ArrayList<>(defenses.size());
-        keys.addAll(defenses.keySet());
-        return keys;
+        if (defenseList == null) {
+            defenseList = new ArrayList<>(defenses.size());
+        }
+        return defenseList;
     }
 
     public String getName() { return name; }
@@ -50,6 +61,36 @@ public class Fighter {
     public Integer getHealth() { return health; }
 
     public void reduceHealth(Integer sub) { health -= sub; }
+
+    public String getPrettySkills() {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < skillList.size(); i++) {
+            String skill = skillList.get(i);
+            sb.append("\n").append(i).append(" - ").append(skill).append(" - Power: ").append(skills.get(skill));
+        }
+
+        return sb.append("\n").toString();
+    }
+
+    public String getPrettyDefenses() {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < defenseList.size(); i++) {
+            String defense = defenseList.get(i);
+            sb.append("\n").append(i).append(" - ").append(defense).append(" - Power: ").append(defenses.get(defense));
+        }
+
+        return sb.append("\n").toString();
+    }
+
+    public String getSkillName(Integer id) {
+        return skillList.get(id);
+    }
+
+    public String getDefenseName(Integer id) {
+        return defenseList.get(id);
+    }
 
     @Override
     public String toString() {
