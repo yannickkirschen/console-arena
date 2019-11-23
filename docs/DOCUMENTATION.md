@@ -1,3 +1,0 @@
-# Documentation for ConsoleArena
-
-To be filled with content...
