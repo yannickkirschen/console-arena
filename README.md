@@ -4,7 +4,7 @@
 
 *ConsoleArena* is a free console fighting game written in Java and is part of a school project.
 
-You can find the documentation [here](https://github.com/yannickkirschen/console-arena/blob/master/doc/DOCUMENTATION.md).
+You can find the documentation [here](https://github.com/yannickkirschen/console-arena/blob/master/docs/DOCUMENTATION.md).
 
 ## Usage
 
