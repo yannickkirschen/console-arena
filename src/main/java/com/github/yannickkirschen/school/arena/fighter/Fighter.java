@@ -89,7 +89,7 @@ public final class Fighter {
     public void reduceHealth(Integer value) { health = health - Math.abs(value); }
 
     /**
-     * Constructs all skills of a specific type in order to be displayed as a menu for the user. Such as:
+     * Constructs all skills of a specific mode in order to be displayed as a menu for the user. Such as:
      *
      * <pre>
      *     How do you want to attack?
@@ -100,14 +100,14 @@ public final class Fighter {
      * <p>
      * The user can now select which attack to use.
      *
-     * @param type The type of the skills to display.
+     * @param mode The mode of the skills to display.
      *
-     * @return All skills of a specific type as a pretty string.
+     * @return All skills of a specific mode as a pretty string.
      */
-    public String skillsAsString(Mode type) {
-        StringBuilder sb = new StringBuilder().append("\n").append("How do you want to ").append(type == Mode.ATTACK ? "attack" : "defend").append("?");
+    public String skillsAsString(Mode mode) {
+        StringBuilder sb = new StringBuilder().append("\n").append("How do you want to ").append(mode == Mode.ATTACK ? "attack" : "defend").append("?");
 
-        for (Skill skill : getSkills(type)) {
+        for (Skill skill : getSkills(mode)) {
             sb.append("\n").append(skill.getId()).append(" - ").append(skill.getName()).append("(Power: ").append(skill.getPower()).append(")");
         }
 
@@ -115,14 +115,14 @@ public final class Fighter {
     }
 
     /**
-     * Selects a random skill of a specific type.
+     * Selects a random skill of a specific mode.
      *
-     * @param type The type of the skill to randomly select.
+     * @param mode The mode of the skill to randomly select.
      *
      * @return A random skill.
      */
-    public Skill getRandomSkill(Mode type) {
-        List<Skill> skillList = getSkills(type);
+    public Skill getRandomSkill(Mode mode) {
+        List<Skill> skillList = getSkills(mode);
         return skillList.get(new Random().nextInt(skillList.size()));
     }
 
@@ -135,19 +135,19 @@ public final class Fighter {
     public Integer getPower() { return power; }
 
     /**
-     * Selects all skill of a specific type.
+     * Selects all skill of a specific mode.
      *
-     * @param type The type to get all the skills to.
+     * @param mode The mode to get all the skills to.
      *
-     * @return All skills for a specific type. An empty list, if <code>type</code> is <code>null</code>.
+     * @return All skills for a specific mode. An empty list, if <code>mode</code> is <code>null</code>.
      */
-    public List<Skill> getSkills(Mode type) {
-        if (type == Mode.ATTACK) {
+    public List<Skill> getSkills(Mode mode) {
+        if (mode == Mode.ATTACK) {
             if (attacks == null) {
                 attacks = skills.stream().filter(skill -> skill.getType() == Mode.ATTACK).collect(Collectors.toList());
             }
             return attacks;
-        } else if (type == Mode.DEFENSE) {
+        } else if (mode == Mode.DEFENSE) {
             if (defenses == null) {
                 defenses = skills.stream().filter(skill -> skill.getType() == Mode.DEFENSE).collect(Collectors.toList());
             }
