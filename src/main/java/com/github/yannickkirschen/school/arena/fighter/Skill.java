@@ -2,39 +2,65 @@ package com.github.yannickkirschen.school.arena.fighter;
 
 import java.util.Objects;
 
-public class Skill {
+/**
+ * A {@link Skill} defines a single skill a fighter can have in order to attack or defend. The ID gets generated when reading the YAML file with all fighters.
+ * <p>
+ * Its only purpose is to allow an easy selection of a skill in the console. Though the ID allows identifying a skill, the name must also be unique, so that it
+ * does not lead to misunderstandings.
+ * <p>
+ * The power is an abstract value, saying how strong a fighter is. It is used to calculate, whether a player won or lost a fight.
+ * <p>
+ * The type specifies if the skill can be used for attacks or for defends.
+ * <p>
+ * Two skills are equal to each other when their IDs and names are equal.
+ *
+ * @author Yannick Kirschen
+ * @see Fighter
+ * @see Fighters
+ * @see Mode
+ * @since 1.0.0
+ */
+public final class Skill {
     private Integer id;
     private String name;
-    private SkillType type;
-    private Integer strength;
+    private Integer power;
+    private Mode type;
 
-    public Skill() {
-        // Needed for YAML serialization
+    private Skill(Integer id, String name, Integer power, Mode type) {
+        this.id = id;
+        this.name = name;
+        this.power = power;
+        this.type = type;
+    }
+
+    /**
+     * Constructs a new skill from a {@link YamlSkill}.
+     *
+     * @param yamlSkill The skill read from the YAML file with all fighters to create the fighter from.
+     * @param type      The type of the skill. (attack/defend)
+     * @param id        The ID of the new skill. Must be unique.
+     *
+     * @return A new skill based on the one read from the YAML file.
+     */
+    static Skill fromYamlSkill(YamlSkill yamlSkill, Mode type, Integer id) {
+        return new Skill(id, yamlSkill.getName(), yamlSkill.getPower(), type);
     }
 
     public Integer getId() { return id; }
 
-    public void setId(Integer id) { this.id = id; }
-
     public String getName() { return name; }
 
-    public void setName(String name) { this.name = name; }
+    public Integer getPower() { return power; }
 
-    public SkillType getType() { return type; }
-
-    public void setType(SkillType type) { this.type = type; }
-
-    public Integer getStrength() { return strength; }
-
-    public void setStrength(Integer strength) { this.strength = strength; }
+    public Mode getType() { return type; }
 
     @Override
     public String toString() {
         return "Skill{" +
             "id=" + id +
             ", name='" + name + '\'' +
+            ", power=" + power +
             ", type=" + type +
-            ", strength=" + strength +
             '}';
     }
 
@@ -43,14 +69,9 @@ public class Skill {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
         Skill skill = (Skill) o;
-        return Objects.equals(id, skill.id) &&
-            Objects.equals(name, skill.name) &&
-            type == skill.type &&
-            Objects.equals(strength, skill.strength);
+        return id.equals(skill.id) && name.equals(skill.name);
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id, name, type, strength);
-    }
+    public int hashCode() { return Objects.hash(id, name); }
 }

@@ -1,75 +1,97 @@
 package com.github.yannickkirschen.school.arena;
 
-import com.github.yannickkirschen.school.arena.arena.Arena;
 import com.github.yannickkirschen.school.arena.fighter.Fighter;
-import com.github.yannickkirschen.school.arena.fighter.FighterList;
-import com.github.yannickkirschen.school.arena.fighter.FighterList2;
+import com.github.yannickkirschen.school.arena.fighter.Fighters;
+import com.github.yannickkirschen.school.arena.fighter.Mode;
 import com.github.yannickkirschen.school.arena.yaml.FighterReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.Console;
-import java.util.Random;
-
+/**
+ * The entry point of ConsoleArena and the actual game logic. The game runs until one of the players (either the user or the computer) has a health of 0.
+ *
+ * @author Yannick Kirschen
+ * @see Fighters
+ * @see Fighter
+ * @see Mode
+ * @see Arena
+ * @see com.github.yannickkirschen.school.arena.fighter.Skill
+ * @since 1.0.0
+ */
 public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
-        FighterList2 fighterList2 = FighterReader.read2();
+        ConsoleUtil.ensureNonInteractiveMode();
 
-        FighterList fighters = FighterReader.read();
-
-        Console console = System.console();
-        if (console == null) {
-            LOGGER.error("No console: non-interactive mode!");
-            System.exit(-1);
-        }
-
+        Fighters fighters = Fighters.fromYamlFighters(FighterReader.read());
         LOGGER.info("{}", fighters);
 
-        Fighter fighter = fighters.getAndRemove(Integer.valueOf(console.readLine("Player: ")));
-        LOGGER.info("You've gone for player '{}'", fighter.getName());
+        Fighter one = fighters.getAndRemove(ConsoleUtil.doConsoleInput());
 
-        boolean playerAttacks = true;
+        while (one == null) {
+            LOGGER.info("There was no fighter for the specified ID.");
+            one = fighters.getAndRemove(ConsoleUtil.doConsoleInput());
+        }
 
-        Random random = new Random();
-        while (fighter.getHealth() > 0) {
-            LOGGER.info("Health: {}\n", fighter.getHealth());
-            Fighter enemy = fighters.get(random.nextInt(fighters.length()));
-            LOGGER.info("\n----------");
-            LOGGER.info("You are fighting against '{}' with a power of '{}'.", enemy.getName(), enemy.getPower());
+        Fighter two = fighters.getRandom();
 
-            if (playerAttacks) {
-                LOGGER.info("With which skill do you want to attack?");
-                LOGGER.info("{}", fighter.getPrettySkills());
+        LOGGER.info("You've gone for player '{}'.", one.getName());
+        LOGGER.info("You are fighting against '{}'.", two.getName());
+        ConsoleUtil.doInfo();
 
-                String skill = fighter.getSkillName(Integer.valueOf((console.readLine("Skill: "))));
+        while (one.getHealth() > 0 && two.getHealth() > 0) {
+            ConsoleUtil.clear();
+            healthInfo(one, two);
+            if (fight(one, two, Mode.ATTACK) || fight(one, two, Mode.DEFENSE)) { break; }
+        }
 
-                LOGGER.info("Attacking '{}' with '{}'.", enemy.getName(), skill);
-                String winner = Arena.attack(fighter, enemy, skill);
+        LOGGER.info("{} won the game!", (one.getHealth() > 0 ? one : two).getName());
+    }
 
-                if (winner.equals(fighter.getName())) {
-                    LOGGER.info("You won the game!");
-                } else {
-                    LOGGER.info("You lost the game!");
-                }
-                playerAttacks = false;
-            } else {
-                LOGGER.info("With which defense do you want to defend?");
-                LOGGER.info("{}", fighter.getPrettyDefenses());
-
-                String defense = fighter.getDefenseName(Integer.valueOf((console.readLine("Defense: "))));
-
-                LOGGER.info("Defending '{}' with '{}'.", enemy.getName(), defense);
-                String winner = Arena.defense(fighter, enemy, defense);
-
-                if (winner.equals(fighter.getName())) {
-                    LOGGER.info("You won the game!");
-                } else {
-                    LOGGER.info("You lost the game!");
-                }
-                playerAttacks = true;
+    /**
+     * Do the actual fight of two fighters. Checks, if the loser of this fight has lost the game.
+     *
+     * @param one  The first player (= the user).
+     * @param two  The second player (= the computer)
+     * @param mode The mode of the fight (attack/defend)
+     *
+     * @return
+     */
+    private static boolean fight(Fighter one, Fighter two, Mode mode) {
+        Fighter winner = Arena.fight(one, two, mode);
+        if (winner == null) {
+            LOGGER.info("There was a tie.");
+        } else {
+            LOGGER.info("{} won the fight!", winner.getName());
+            Fighter loser = oppositeFighter(winner, one, two);
+            if (loser.getHealth() <= 0) {
+                return true;
             }
         }
+        return false;
+    }
+
+    /**
+     * Gets the opposite fighter of two fighters. Given you have two fighters <code>A</code> and <code>B</code>. When the actual fighter is <code>A</code>, the
+     * opposite is <code>B</code>. When the actual fighter is <code>B</code>, the opposite is <code>A</code>.
+     *
+     * @param actual The fighter to get the opposite from.
+     * @param one    The first fighter.
+     * @param two    The second fighter.
+     *
+     * @return The opposite fighter of <code>actual</code>.
+     */
+    private static Fighter oppositeFighter(Fighter actual, Fighter one, Fighter two) { return actual.equals(one) ? two : one; }
+
+    /**
+     * Prints the health of two fighters.
+     *
+     * @param one The first fighter.
+     * @param two The second fighter.
+     */
+    private static void healthInfo(Fighter one, Fighter two) {
+        LOGGER.info("{}'s health: {}", one.getName(), one.getHealth());
+        LOGGER.info("{}'s health: {}", two.getName(), two.getHealth());
     }
 }

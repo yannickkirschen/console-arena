@@ -14,25 +14,12 @@
         <maven.compiler.source>13</maven.compiler.source>
         <maven.compiler.target>13</maven.compiler.target>
 
-        <eclipse.collections.version>10.0.0</eclipse.collections.version>
         <yaml.version>1.25</yaml.version>
         <log4j.version>1.7.28</log4j.version>
         <maven.jar.plugin.version>3.2.0</maven.jar.plugin.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.eclipse.collections</groupId>
-            <artifactId>eclipse-collections-api</artifactId>
-            <version>${eclipse.collections.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse.collections</groupId>
-            <artifactId>eclipse-collections</artifactId>
-            <version>${eclipse.collections.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
