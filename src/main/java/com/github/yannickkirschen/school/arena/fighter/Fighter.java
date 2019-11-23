@@ -31,13 +31,23 @@ import java.util.stream.Collectors;
  * @since 1.0.0
  */
 public final class Fighter {
-    List<Skill> attacks;
-    List<Skill> defenses;
     private Integer id;
     private String name;
     private Integer power;
     private List<Skill> skills = new LinkedList<>();
     private Integer health = 100;
+
+    /**
+     * This list allows an easier access to all attacks of a fighter. It gets filled at the first call to {@link #getSkills(Mode)} with mode =
+     * <code>Mode.ATTACK</code>.
+     */
+    private List<Skill> attacks;
+
+    /**
+     * This list allows an easier access to all defenses of a fighter. It gets filled at the first call to {@link #getSkills(Mode)} with mode =
+     * <code>Mode.DEFENSE</code>.
+     */
+    private List<Skill> defenses;
 
     private Fighter(Integer id, String name, Integer power) {
         this.id = id;
