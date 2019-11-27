@@ -24,7 +24,7 @@ public class Main {
     public static void main(String[] args) {
         ConsoleUtil.ensureNonInteractiveMode();
 
-        Fighters fighters = Fighters.fromYamlFighters(FighterReader.read());
+        Fighters fighters = Fighters.fromYamlFighters(FighterReader.read(args));
         LOGGER.info("{}", fighters);
 
         Fighter one = fighters.getAndRemove(ConsoleUtil.doConsoleInput());

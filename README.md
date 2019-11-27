@@ -12,6 +12,9 @@ You can find the documentation [here](https://yannickkirschen.github.io/console-
 mvn clean install # or download the latest JAR-file
 cd target # if not downloaded the JAR-file
 java -jar console-arena-VERSION.jar
+
+# or
+java -jar console-arena-VERSION.jar fighters.yml
 ```
 
 ## License

@@ -45,7 +45,13 @@ In both ways you have to execute the JAR by:
 
 ```bash
 java -jar target/console-arena-VERSION.jar
+
+# or
+java -jar console-arena-VERSION.jar fighters.yml
 ```
+
+The `fighters.yml` can be provided by the user to allow custom characters.
+You can find the details down below.
 
 ## Architecture
 
