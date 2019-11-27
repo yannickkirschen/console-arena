@@ -46,3 +46,108 @@ In both ways you have to execute the JAR by:
 ```bash
 java -jar target/console-arena-VERSION.jar
 ```
+
+## Architecture
+
+### Java
+
+The game is written entirely in Java. Java is an object-oriented, statically typed programming language from the early 1990s.
+It has been chosen for this game, because a specification for the project has been the use of a statically typed, object-oriented
+language (either Java or C#). I would have loved to implement the game in Python, which is also an object-oriented language from
+the early 1990s, but is dynamically typed and has a different way of using e.g. polymorphism or inheritance.
+
+### Maven
+
+#### Why Maven?
+
+Apache Maven is a build management tool written in and for Java. It allows a standardized development and management of Java
+applications. Maven is based on the principle *convention over configuration*. The core of every Maven project is an XML file
+called `pom.xml`. POM stands for *project object model*. The pom defines how a project should be built in the end (e.g. JAR, EAR, WAR),
+and how the files in these containers should be structured. See [apache.com](http://maven.apache.org/) for more details.
+
+#### Dependencies
+
+The key feature of Maven (and, frankly, the reason why everybody uses it), is the use of dependencies. Dependencies are JAR-files that
+have been built from a Maven project and uploaded to a repository.
+The main repository is the [Maven Central Repository](https://mvnrepository.com/repos/central). It contains more than 1 million artifacts (in 2019).
+It is also possible to host a private repository which makes Maven very interesting for the enterprise use, where you have code that should
+not be available in public.
+
+These are the dependencies I use for *ConsoleArena*:
+
+- `org.yaml.snakeyaml` (v1.25) -> Parsing YAML files
+- `org.slf4j.slf4j-log4j12` (v1.7.28) -> A popular logging framework
+
+#### Plugins
+
+Maven allows the use of plugins, that get executed when the project is being built. This allows a custom structure of the project
+and an easy adoption to a companies needs.
+
+These are the plugins I use for *ConsoleArena*:
+
+- `org.apache.maven.plugins.maven-dependency-plugin` -> Copy all dependencies into the JAR-file, making it a standalone application. Otherwise, the dependencies have to be in the classpath.
+- `org.apache.maven.plugins.maven-jar-plugin` (v3.2.0) -> Set the class with the main method, so the JAR can be executed.
+
+### Design
+
+#### Overview
+
+Here is a simply overview (*note: this is freestyle and no UML!*):
+
+![Image of Yaktocat](img/Overview.png)
+
+Here is a simplified UML diagram:
+
+**To be created**
+
+
+#### YAML
+
+*ConsoleArena* is (in terms of the characters) a highly customizable game. All available characters (called 'fighters') are stored in a YAML
+file and read at startup. That's how the YAML file looks like:
+
+```yaml
+fighters:
+    -   name: "Player 1"
+        power: 18
+        attacks:
+            -   name: "punch"
+                power: 1
+            -   name: "kick"
+                power: 2
+        defenses:
+            -   name: "shield"
+                power: 1
+            -   name: "run away"
+                power: 2
+    -   name: "Player 2"
+        power: 20
+        attacks:
+            -   name: "punch"
+                power: 1
+            -   name: "kick"
+                power: 2
+        defenses:
+            -   name: "shield"
+                power: 1
+            -   name: "run away"
+                power: 2
+```
+
+By using this structure, the user can extend the fighters as he wants to. Each fighter gets transferred into a class called
+`com.github.yannickkirschen.school.arena.fighter.Fighter`, so we end up with a list of fighters. Each fighter has methods to get several characteristics.
+
+#### A fight
+
+The `com.github.yannickkirschen.school.arena.Arena` is the place where the fight takes place. A fight is calculated by the formula:
+
+*[power of skill one] + [power of player one] - [power of skill two] - [power of player two]*
+
+The absolute value of this result is subtracted from the loser's health.
+
+The main method (in `com.github.yannickkirschen.school.arena.Main`) controls everything. It reads the YAML file with all fighters, lets the user
+choose a fighter and starts the game loop. When the user attacks, the enemy chooses its defense randomly and vice-versa.
+
+#### Inheritance and polymorphism
+
+Since there is no single class for each player (they rather get dynamically load), there is no need for the use of inheritance and polymorphism.
