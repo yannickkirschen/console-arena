@@ -1,5 +1,32 @@
 # ConsoleArena
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation and Running](#installation-and-running)
+    - [Prerequisites](#prerequisites)
+    - [How to get ConsoleArena](#how-to-get-consolearena)
+        - [Option 1: Cloning and building](#option-1-cloning-and-building)
+            - [Without IDE](#without-ide)
+            - [With IDE](#with-ide)
+        - [Option 2: Downloading the JAR](#option-2-downloading-the-jar)
+- [Architecture](#architecture)
+    - [Java](#java)
+    - [Maven](#maven)
+        - [Why Maven?](#why-maven)
+        - [Dependencies](#dependencies)
+        - [Plugins](#plugins)
+    - [Design](#design)
+        - [Big Picture](#big-picture)
+        - [YAML](#yaml)
+        - [A fight](#a-fight)
+        - [Inheritance and Polymorphism](#inheritance-and-polymorphism)
+        - [Access Modifiers](#access-modifiers)
+        - [Object-Orientation?](#object-orientation)
+        - [Quality Management](#quality-management)
+        - [More Information](#more-information)
+- [Legal](#legal)
+
 ## Overview
 
 *ConsoleArena* is a free console fighting game written in Java and is part of a school project. The game allows
@@ -16,7 +43,7 @@ The game is finished when one of the players has no more health.
 - Java (JRE)  \>= 1.8
 - Terminal
 
-## How to get ConsoleArena
+### How to get ConsoleArena
 
 There are two options to get *ConsoleArena*:
 
@@ -105,7 +132,7 @@ These are the plugins I use for *ConsoleArena*:
 
 ### Design
 
-#### Overview
+#### Big Picture
 
 Here is a simply overview (*note: this is freestyle and no UML!*):
 
@@ -186,10 +213,6 @@ One specification for the project was the development of an object-oriented app.
 notice that there are some classes that only have static methods. I decided to not implement these classes in an object-oriented manner, because in my
 opinion it looks nicer the way it is now. Utils should (almost) always be static anyway, in my opinion.
 
-#### More Information
-
-If this documentation does not answer some of your questions, please refer to the JavaDoc.
-
 #### Quality Management
 
 There is a unit test that tests the parsing of the YAML file with all fighters. When there is a push to GitHub, a GitHub Action launches that builds the
@@ -197,6 +220,10 @@ project with Maven (and executes the unit test), to make sure that everything re
 
 When developing, I use the SonarLint plugin, as well as the built-in code analysis by IntelliJ, to check the code for common bad-practises. When trying to
 commit, I get noticed when an issue is found and I can solve it.
+
+#### More Information
+
+If this documentation does not answer your questions, please refer to the JavaDoc.
 
 ## Legal
 
