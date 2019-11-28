@@ -13,10 +13,8 @@ The game is finished when one of the players has no more health.
 
 ### Prerequisites
 
-Prerequisite | Version
------------- | -------------
-Java (JRE) | \>= 1.8
-Terminal | -
+- Java (JRE)  \>= 1.8
+- Terminal
 
 ## How to get ConsoleArena
 
@@ -164,11 +162,35 @@ The absolute value of this result is subtracted from the loser's health.
 The main method (in `com.github.yannickkirschen.school.arena.Main`) controls everything. It reads the YAML file with all fighters, lets the user
 choose a fighter and starts the game loop. When the user attacks, the enemy chooses its defense randomly and vice-versa.
 
-#### Inheritance and polymorphism
+#### Inheritance and Polymorphism
 
 Since there is no single class for each player (they rather get dynamically load), there is no need for the use of inheritance and polymorphism.
 
-### Quality Management
+#### Access Modifiers
+
+Every class, method and field has the most restricting access modifier that's possible. Only the classes to parse the YAML file in
+(`com.github.yannickkirschen.school.arena.fighter.YAML*`) have public getters and setters for all fields, so that the YAML parser can use them.
+This is why there are some methods annotated with `SuppressWarnings("unused")`, although this is bad practise. The IDE would grumble otherwise.
+
+The following classes can only be instantiated via a static method called `getFromYamlXXX()`:
+
+- `com.github.yannickkirschen.school.arena.fighter.Fighter`
+- `com.github.yannickkirschen.school.arena.fighter.Fighters`
+- `com.github.yannickkirschen.school.arena.fighter.Skill`
+
+This ensures, that these classes are instantiated the right way. See the UML diagram for more information.
+
+#### Object-Orientation?
+
+One specification for the project was the development of an object-oriented app. When you read the code (or take a look at the UML diagram), you'll
+notice that there are some classes that only have static methods. I decided to not implement these classes in an object-oriented manner, because in my
+opinion it looks nicer the way it is now. Utils should (almost) always be static anyway, in my opinion.
+
+#### More Information
+
+If this documentation does not answer some of your questions, please refer to the JavaDoc.
+
+#### Quality Management
 
 There is a unit test that tests the parsing of the YAML file with all fighters. When there is a push to GitHub, a GitHub Action launches that builds the
 project with Maven (and executes the unit test), to make sure that everything regarding the structure of the project is fine.
@@ -180,5 +202,5 @@ commit, I get noticed when an issue is found and I can solve it.
 
 *Copyright (c) 2019, Yannick Kirschen, All rights reserved.*
 
-This project and its documentation is licensed under the [MIT License](https://github.com/yannickkirschen/console-arena/blob/master/LICENSE).
+This project and its documentation are licensed under the [MIT License](https://github.com/yannickkirschen/console-arena/blob/master/LICENSE).
 Happy forking :)
