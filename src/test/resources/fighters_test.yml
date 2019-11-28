@@ -1,0 +1,25 @@
+fighters:
+    -   name: "Vader"
+        power: 18
+        attacks:
+            -   name: "punch"
+                power: 1
+            -   name: "kick"
+                power: 2
+        defenses:
+            -   name: "shield"
+                power: 1
+            -   name: "run away"
+                power: 2
+    -   name: "Yoda"
+        power: 20
+        attacks:
+            -   name: "punch"
+                power: 1
+            -   name: "kick"
+                power: 2
+        defenses:
+            -   name: "shield"
+                power: 1
+            -   name: "run away"
+                power: 2
