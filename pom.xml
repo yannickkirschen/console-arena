@@ -43,6 +43,20 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>${project.basedir}</directory>
+                <includes>
+                    <include>CHANGELOG.md</include>
+                    <include>CODE_OF_CONDUCT.md</include>
+                    <include>CONTRIBUTING.md</include>
+                    <include>LICENSE</include>
+                    <include>README.md</include>
+                </includes>
+                <targetPath>META-INF</targetPath>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
