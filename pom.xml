@@ -8,6 +8,36 @@
     <artifactId>console-arena</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
+    <name>ConsoleArena</name>
+    <description>ConsoleArena is a free console fighting game written in Java and is part of a school project.</description>
+    <url>https://github.com/yannickkirschen/console-arena</url>
+
+    <inceptionYear>2019</inceptionYear>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://github.com/yannickkirschen/console-arena/blob/master/LICENSE</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Yannick Kirschen</name>
+            <email>github.yannickkirschen@protonmail.com</email>
+        </developer>
+    </developers>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/yannickkirschen/console-arena/issues</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>GitHub Actions</system>
+        <url>https://github.com/yannickkirschen/console-arena/actions</url>
+    </ciManagement>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
