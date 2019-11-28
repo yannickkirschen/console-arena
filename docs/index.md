@@ -1,5 +1,3 @@
-# ConsoleArena
-
 ## Table of Contents
 
 - [Overview](#overview)
