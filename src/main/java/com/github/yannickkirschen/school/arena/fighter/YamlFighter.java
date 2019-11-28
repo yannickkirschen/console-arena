@@ -7,6 +7,7 @@ import java.util.Objects;
  * The {@link YamlFighter} is only used as a transport object to parse a fighter from the YAML file into it. See {@link Fighter} for more details.
  *
  * @author Yannick Kirschen
+ * @implNote Though it is bad practice to use {@link SuppressWarnings}, it is used in that class, so that the IDE won't grumble.
  * @see Fighter
  * @since 1.0.0
  */
@@ -16,24 +17,29 @@ public final class YamlFighter {
     private List<YamlSkill> attacks;
     private List<YamlSkill> defenses;
 
+    @SuppressWarnings("unused")
     public YamlFighter() {
         // Needed for YAML serialization
     }
 
     public String getName() { return name; }
 
+    @SuppressWarnings("unused")
     public void setName(String name) { this.name = name; }
 
     public Integer getPower() { return power; }
 
+    @SuppressWarnings("unused")
     public void setPower(Integer power) { this.power = power; }
 
     public List<YamlSkill> getAttacks() { return attacks; }
 
+    @SuppressWarnings("unused")
     public void setAttacks(List<YamlSkill> attacks) { this.attacks = attacks; }
 
     public List<YamlSkill> getDefenses() { return defenses; }
 
+    @SuppressWarnings("unused")
     public void setDefenses(List<YamlSkill> defenses) { this.defenses = defenses; }
 
     @Override

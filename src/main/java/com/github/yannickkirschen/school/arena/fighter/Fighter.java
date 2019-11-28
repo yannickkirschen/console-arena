@@ -31,10 +31,10 @@ import java.util.stream.Collectors;
  * @since 1.0.0
  */
 public final class Fighter {
-    private Integer id;
-    private String name;
-    private Integer power;
-    private List<Skill> skills = new LinkedList<>();
+    private final Integer id;
+    private final String name;
+    private final Integer power;
+    private final List<Skill> skills = new LinkedList<>();
     private Integer health = 100;
 
     /**

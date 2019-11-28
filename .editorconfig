@@ -300,7 +300,7 @@ ij_continuation_indent_size = 2
 ij_yaml_keep_indents_on_empty_lines = false
 ij_yaml_keep_line_breaks = true
 
-# noinspection EditorConfigNoMatchingFiles
+# noinspection EditorConfigNoMatchingFiles,EditorConfigKeyCorrectness
 [{*.zsh, *.bash, *.sh}]
 ij_shell_binary_ops_start_line = false
 ij_shell_keep_column_alignment_padding = false

@@ -19,6 +19,7 @@ public final class YamlFighters {
 
     public List<YamlFighter> getFighters() { return fighters; }
 
+    @SuppressWarnings("unused")
     public void setFighters(List<YamlFighter> fighters) { this.fighters = fighters; }
 
     @Override

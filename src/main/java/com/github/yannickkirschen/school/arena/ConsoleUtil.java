@@ -1,5 +1,6 @@
 package com.github.yannickkirschen.school.arena;
 
+import com.github.yannickkirschen.school.arena.exception.NonInteractiveModeException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,10 +22,9 @@ final class ConsoleUtil {
      * Checks, if the terminal runs in an interactive mode. If not, the application quits with a status code of -1. A non-interactive mode may be the terminal
      * in an IDE.
      */
-    static void ensureNonInteractiveMode() {
+    static void ensureNonInteractiveMode() throws NonInteractiveModeException {
         if (CONSOLE == null) {
-            LOGGER.error("No console: non-interactive mode!");
-            System.exit(-1);
+            throw new NonInteractiveModeException();
         }
     }
 

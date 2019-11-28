@@ -60,7 +60,7 @@ final class Arena {
         LOGGER.info("{} {} with '{}'.", one.getName(), s1, skill1.getName());
         LOGGER.info("{} {} with '{}'.", two.getName(), s2, skill2.getName());
 
-        Integer result = skill1.getPower() + one.getPower() - skill2.getPower() - two.getPower();
+        int result = skill1.getPower() + one.getPower() - skill2.getPower() - two.getPower();
 
         if (result > 0) {
             two.reduceHealth(result);

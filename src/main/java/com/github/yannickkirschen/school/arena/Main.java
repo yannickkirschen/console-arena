@@ -1,10 +1,10 @@
 package com.github.yannickkirschen.school.arena;
 
+import com.github.yannickkirschen.school.arena.exception.NonInteractiveModeException;
 import com.github.yannickkirschen.school.arena.fighter.Fighter;
 import com.github.yannickkirschen.school.arena.fighter.Fighters;
 import com.github.yannickkirschen.school.arena.fighter.Mode;
 import com.github.yannickkirschen.school.arena.yaml.FighterReader;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,12 @@ public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
-        ConsoleUtil.ensureNonInteractiveMode();
+        try {
+            ConsoleUtil.ensureNonInteractiveMode();
+        } catch (NonInteractiveModeException e) {
+            LOGGER.error("No console: non-interactive mode!");
+            System.exit(-1);
+        }
 
         Fighters fighters = Fighters.fromYamlFighters(FighterReader.read(args));
         LOGGER.info("{}", fighters);

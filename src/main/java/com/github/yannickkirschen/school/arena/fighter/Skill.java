@@ -21,10 +21,10 @@ import java.util.Objects;
  * @since 1.0.0
  */
 public final class Skill {
-    private Integer id;
-    private String name;
-    private Integer power;
-    private Mode type;
+    private final Integer id;
+    private final String name;
+    private final Integer power;
+    private final Mode type;
 
     private Skill(Integer id, String name, Integer power, Mode type) {
         this.id = id;

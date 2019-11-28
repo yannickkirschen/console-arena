@@ -15,7 +15,7 @@ import java.util.Random;
  * @since 1.0.0
  */
 public final class Fighters {
-    private List<Fighter> fighterList = new LinkedList<>();
+    private final List<Fighter> fighterList = new LinkedList<>();
 
     private Fighters() {}
 
