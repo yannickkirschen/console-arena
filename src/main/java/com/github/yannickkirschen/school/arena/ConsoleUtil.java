@@ -23,15 +23,8 @@ final class ConsoleUtil {
      * in an IDE.
      */
     static void ensureNonInteractiveMode() throws NonInteractiveModeException {
-        if (CONSOLE == null) {
-            throw new NonInteractiveModeException();
-        }
+        if (CONSOLE == null) { throw new NonInteractiveModeException(); }
     }
-
-    /**
-     * Clears the screen.
-     */
-    static void clear() { LOGGER.info("\033[H\033[2J"); }
 
     /**
      * Prints an information that the user shall press any key to continue and can press 'q' at any point in the game to quit.
@@ -50,6 +43,7 @@ final class ConsoleUtil {
         if ("q".equals(s)) {
             System.exit(0);
         }
+
         try {
             return Integer.valueOf(s);
         } catch (NumberFormatException e) {

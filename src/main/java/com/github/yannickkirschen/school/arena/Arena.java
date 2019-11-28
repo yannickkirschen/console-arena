@@ -47,18 +47,18 @@ final class Arena {
         String s2 = modeOfFirstPlayer == Mode.ATTACK ? "defends" : "attacks";
 
         Mode oppositeSkill = modeOfFirstPlayer == Mode.ATTACK ? Mode.DEFENSE : Mode.ATTACK;
+        Skill skill1;
+        Skill skill2;
 
-        LOGGER.info(one.skillsAsString(modeOfFirstPlayer));
-
-        Skill skill1 = getSkillOfFighter(one, modeOfFirstPlayer);
-        while (skill1 == null) {
-            LOGGER.info("There was no skill for the specified ID.");
-            skill1 = getSkillOfFighter(one, modeOfFirstPlayer);
+        if (modeOfFirstPlayer == Mode.ATTACK) {
+            skill1 = getSkillOfUser(one, modeOfFirstPlayer);
+            skill2 = getSkillOfComputer(two, oppositeSkill, s2);
+        } else {
+            skill2 = getSkillOfComputer(two, oppositeSkill, s2);
+            skill1 = getSkillOfUser(one, modeOfFirstPlayer);
         }
-        Skill skill2 = two.getRandomSkill(oppositeSkill);
 
         LOGGER.info("{} {} with '{}'.", one.getName(), s1, skill1.getName());
-        LOGGER.info("{} {} with '{}'.", two.getName(), s2, skill2.getName());
 
         int result = skill1.getPower() + one.getPower() - skill2.getPower() - two.getPower();
 
@@ -68,8 +68,42 @@ final class Arena {
         } else if (result < 0) {
             one.reduceHealth(result);
             return two;
+        } else {
+            return null;
         }
-        return null;
+    }
+
+    /**
+     * Lets the user select a skill to attack/defend with.
+     *
+     * @param fighter The user's fighter.
+     * @param mode    The mode of the skill to choose from.
+     *
+     * @return The skill the user chose.
+     */
+    private static Skill getSkillOfUser(Fighter fighter, Mode mode) {
+        LOGGER.info(fighter.skillsAsString(mode));
+        Skill skill = getSkillOfFighter(fighter, mode);
+        while (skill == null) {
+            LOGGER.info("There was no skill for the specified ID.");
+            skill = getSkillOfFighter(fighter, mode);
+        }
+        return skill;
+    }
+
+    /**
+     * Randomly chooses the skill that the computer will attack/defend with.
+     *
+     * @param fighter The computer's fighter.
+     * @param mode    The mode of the skill to choose from.
+     * @param s       The string to show based on the mode (attacks/defends): "{} {} with '{}'." (format: name, s, skill name)
+     *
+     * @return The skill the computer chose.
+     */
+    private static Skill getSkillOfComputer(Fighter fighter, Mode mode, String s) {
+        Skill skill = fighter.getRandomSkill(mode);
+        LOGGER.info("\n\n!!! {} {} with '{}'.", fighter.getName(), s, skill.getName());
+        return skill;
     }
 
     /**

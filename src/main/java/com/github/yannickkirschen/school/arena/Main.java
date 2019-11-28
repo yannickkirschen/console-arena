@@ -47,9 +47,10 @@ public class Main {
         ConsoleUtil.doInfo();
 
         while (one.getHealth() > 0 && two.getHealth() > 0) {
-            ConsoleUtil.clear();
             healthInfo(one, two);
-            if (fight(one, two, Mode.ATTACK) || fight(one, two, Mode.DEFENSE)) { break; }
+            if (fight(one, two, Mode.ATTACK) || fight(one, two, Mode.DEFENSE)) {
+                break;
+            }
         }
 
         LOGGER.info("{} won the game!", (one.getHealth() > 0 ? one : two).getName());
@@ -66,10 +67,8 @@ public class Main {
      */
     private static boolean fight(Fighter one, Fighter two, Mode mode) {
         Fighter winner = Arena.fight(one, two, mode);
-        if (winner == null) {
-            LOGGER.info("There was a tie.");
-        } else {
-            LOGGER.info("{} won the fight!", winner.getName());
+        if (winner == null) { LOGGER.info("There was a tie."); } else {
+            LOGGER.info("\n\n<<< {} won the fight! >>>\n", winner.getName());
             Fighter loser = oppositeFighter(winner, one, two);
             return loser.getHealth() <= 0;
         }
