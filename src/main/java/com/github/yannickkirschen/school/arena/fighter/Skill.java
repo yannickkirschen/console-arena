@@ -46,13 +46,13 @@ public final class Skill {
         return new Skill(id, yamlSkill.getName(), yamlSkill.getPower(), type);
     }
 
-    public Integer getId() { return id; }
+    Integer getId() { return id; }
 
     public String getName() { return name; }
 
     public Integer getPower() { return power; }
 
-    public Mode getType() { return type; }
+    Mode getType() { return type; }
 
     @Override
     public String toString() {

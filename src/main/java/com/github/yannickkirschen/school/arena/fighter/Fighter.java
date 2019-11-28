@@ -63,7 +63,7 @@ public final class Fighter {
      *
      * @return A new fighter based on the one read from the YAML file.
      */
-    public static Fighter fromYamlFighter(YamlFighter yamlFighter, Integer id) {
+    static Fighter fromYamlFighter(YamlFighter yamlFighter, Integer id) {
         Fighter fighter = new Fighter(id, yamlFighter.getName(), yamlFighter.getPower());
 
         // Extract attacks
@@ -128,7 +128,7 @@ public final class Fighter {
 
     private void addSkill(Skill skill) { skills.add(skill); }
 
-    public Integer getId() { return id; }
+    Integer getId() { return id; }
 
     public String getName() { return name; }
 

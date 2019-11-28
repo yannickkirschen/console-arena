@@ -15,7 +15,7 @@ import java.util.Random;
  * @since 1.0.0
  */
 public final class Fighters {
-    private List<Fighter> fighters = new LinkedList<>();
+    private List<Fighter> fighterList = new LinkedList<>();
 
     private Fighters() {}
 
@@ -45,9 +45,9 @@ public final class Fighters {
      * @return The fighter for the specified ID. <code>null</code> if there is no fighter with that ID.
      */
     public Fighter getAndRemove(Integer id) {
-        for (Fighter fighter : fighters) {
+        for (Fighter fighter : fighterList) {
             if (id.equals(fighter.getId())) {
-                fighters.remove(fighter);
+                fighterList.remove(fighter);
                 return fighter;
             }
         }
@@ -59,9 +59,9 @@ public final class Fighters {
      *
      * @return A random fighter.
      */
-    public Fighter getRandom() { return fighters.get(new Random().nextInt(fighters.size())); }
+    public Fighter getRandom() { return fighterList.get(new Random().nextInt(fighterList.size())); }
 
-    private void addFighter(Fighter fighter) { fighters.add(fighter); }
+    private void addFighter(Fighter fighter) { fighterList.add(fighter); }
 
     /**
      * Constructs all fighters in order to be displayed as a menu for the user. Such as:
@@ -81,7 +81,7 @@ public final class Fighters {
     public String toString() {
         StringBuilder sb = new StringBuilder().append("Choose a player: ");
 
-        for (Fighter fighter : fighters) {
+        for (Fighter fighter : fighterList) {
             sb.append("\n").append(fighter.getId()).append(" - ").append(fighter.getName()).append(" (Power: ").append(fighter.getPower()).append(")");
         }
 
@@ -93,9 +93,9 @@ public final class Fighters {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
         Fighters fighters1 = (Fighters) o;
-        return Objects.equals(fighters, fighters1.fighters);
+        return Objects.equals(fighterList, fighters1.fighterList);
     }
 
     @Override
-    public int hashCode() { return Objects.hash(fighters); }
+    public int hashCode() { return Objects.hash(fighterList); }
 }

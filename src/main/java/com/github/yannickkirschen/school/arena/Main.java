@@ -4,6 +4,7 @@ import com.github.yannickkirschen.school.arena.fighter.Fighter;
 import com.github.yannickkirschen.school.arena.fighter.Fighters;
 import com.github.yannickkirschen.school.arena.fighter.Mode;
 import com.github.yannickkirschen.school.arena.yaml.FighterReader;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +57,7 @@ public class Main {
      * @param two  The second player (= the computer)
      * @param mode The mode of the fight (attack/defend)
      *
-     * @return
+     * @return <code>true</code>, if the loser of the fight has no more health (and the game is over). Otherwise <code>false</code>.
      */
     private static boolean fight(Fighter one, Fighter two, Mode mode) {
         Fighter winner = Arena.fight(one, two, mode);
@@ -65,9 +66,7 @@ public class Main {
         } else {
             LOGGER.info("{} won the fight!", winner.getName());
             Fighter loser = oppositeFighter(winner, one, two);
-            if (loser.getHealth() <= 0) {
-                return true;
-            }
+            return loser.getHealth() <= 0;
         }
         return false;
     }
