@@ -36,6 +36,8 @@ The game is finished when one of the players has no more health.
 
 ## Installation and Running
 
+You can clone the project [here](https://github.com/yannickkirschen/console-arena).
+
 ### Prerequisites
 
 - Java (JRE)  \>= 1.8
