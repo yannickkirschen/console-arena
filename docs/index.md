@@ -11,15 +11,24 @@ The game is finished when one of the players has no more health.
 
 ## Installation and Running
 
+### Prerequisites
+
+Prerequisite | Version
+------------ | -------------
+Java (JRE) | \>= 1.8
+Terminal | -
+
+## How to get ConsoleArena
+
 There are two options to get *ConsoleArena*:
 
-### Option 1: Cloning and building
+#### Option 1: Cloning and building
 
 Go to https://github.com/yannickkirschen/console-arena and clone the repository. You also have to have
 [Apache Maven](https://maven.apache.org/) installed. When you are checking out the repo in an IDE, such as
 [IntelliJ IDEA](https://www.jetbrains.com/idea/), you don't have to install Maven.
 
-**Without IDE**
+##### Without IDE
 
 Open the terminal and navigate to the root folder of the project (the one with the `pom.xml` inside it).
 
@@ -29,13 +38,13 @@ Type:
 mvn clean install
 ```
 
-**With IDE**
+##### With IDE
 
 Run a new Maven configuration `clean install`.
 
 The project is now built into `target/console-arena-VERSION.jar`. 
 
-### Option 2: Downloading the JAR
+#### Option 2: Downloading the JAR
 
 The easiest way of running *ConsoleArena* is to download the JAR directly.
 Go to [Releases](https://github.com/yannickkirschen/console-arena/releases). Select the latest release and download the
@@ -52,6 +61,8 @@ java -jar console-arena-VERSION.jar fighters.yml
 
 The `fighters.yml` can be provided by the user to allow custom characters.
 You can find the details down below.
+
+Have fun! The game should be self-explanatory.
 
 ## Architecture
 
@@ -100,12 +111,11 @@ These are the plugins I use for *ConsoleArena*:
 
 Here is a simply overview (*note: this is freestyle and no UML!*):
 
-![Image of Yaktocat](img/Overview.png)
+![Overview](img/Overview.png)
 
-Here is a simplified UML diagram:
+Here is a simplified UML diagram (the classes for YAML parsing are left):
 
-**To be created**
-
+![UML](img/UML.png)
 
 #### YAML
 
@@ -157,3 +167,18 @@ choose a fighter and starts the game loop. When the user attacks, the enemy choo
 #### Inheritance and polymorphism
 
 Since there is no single class for each player (they rather get dynamically load), there is no need for the use of inheritance and polymorphism.
+
+### Quality Management
+
+There is a unit test that tests the parsing of the YAML file with all fighters. When there is a push to GitHub, a GitHub Action launches that builds the
+project with Maven (and executes the unit test), to make sure that everything regarding the structure of the project is fine.
+
+When developing, I use the SonarLint plugin, as well as the built-in code analysis by IntelliJ, to check the code for common bad-practises. When trying to
+commit, I get noticed when an issue is found and I can solve it.
+
+## Legal
+
+*Copyright (c) 2019, Yannick Kirschen, All rights reserved.*
+
+This project and its documentation is licensed under the [MIT License](https://github.com/yannickkirschen/console-arena/blob/master/LICENSE).
+Happy forking :)
