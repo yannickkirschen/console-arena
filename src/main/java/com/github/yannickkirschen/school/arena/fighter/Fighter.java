@@ -144,12 +144,12 @@ public final class Fighter {
     public List<Skill> getSkills(Mode mode) {
         if (mode == Mode.ATTACK) {
             if (attacks == null) {
-                attacks = skills.stream().filter(skill -> skill.getType() == Mode.ATTACK).collect(Collectors.toList());
+                attacks = skills.stream().parallel().filter(skill -> skill.getType() == Mode.ATTACK).collect(Collectors.toList());
             }
             return attacks;
         } else if (mode == Mode.DEFENSE) {
             if (defenses == null) {
-                defenses = skills.stream().filter(skill -> skill.getType() == Mode.DEFENSE).collect(Collectors.toList());
+                defenses = skills.stream().parallel().filter(skill -> skill.getType() == Mode.DEFENSE).collect(Collectors.toList());
             }
             return defenses;
         }
