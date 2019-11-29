@@ -2,24 +2,24 @@ fighters:
     -   name: "Vader"
         power: 18
         attacks:
-            -   name: "punch"
-                power: 1
-            -   name: "kick"
-                power: 2
+            -   name: "Lightsaber"
+                power: 10
+            -   name: "gag"
+                power: 4
         defenses:
             -   name: "shield"
-                power: 1
+                power: 3
             -   name: "run away"
-                power: 2
+                power: 5
     -   name: "Yoda"
         power: 20
         attacks:
-            -   name: "punch"
-                power: 1
+            -   name: "Lightsaber"
+                power: 14
             -   name: "kick"
                 power: 2
         defenses:
             -   name: "shield"
-                power: 1
+                power: 4
             -   name: "run away"
                 power: 2
