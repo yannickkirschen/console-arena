@@ -46,10 +46,12 @@ final class Arena {
         String s1 = modeOfFirstPlayer == Mode.ATTACK ? "attacks" : "defends";
         String s2 = modeOfFirstPlayer == Mode.ATTACK ? "defends" : "attacks";
 
+        // 1. Get opposite skill for enemy
         Mode oppositeSkill = modeOfFirstPlayer == Mode.ATTACK ? Mode.DEFENSE : Mode.ATTACK;
         Skill skill1;
         Skill skill2;
 
+        // 2. Let the user choose an attack/defense
         if (modeOfFirstPlayer == Mode.ATTACK) {
             skill1 = getSkillOfUser(one, modeOfFirstPlayer);
             skill2 = getSkillOfComputer(two, oppositeSkill, s2);
@@ -60,6 +62,7 @@ final class Arena {
 
         LOGGER.info("{} {} with '{}'.", one.getName(), s1, skill1.getName());
 
+        // 3. Calculate result
         int result = skill1.getPower() + one.getPower() - skill2.getPower() - two.getPower();
 
         if (result > 0) {

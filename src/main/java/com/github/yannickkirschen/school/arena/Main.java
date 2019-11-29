@@ -23,6 +23,7 @@ public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
+        // 1. Ensure non-interactive mode (the game must be started in a normal terminal, not in the IDE)
         try {
             ConsoleUtil.ensureNonInteractiveMode();
         } catch (NonInteractiveModeException e) {
@@ -30,22 +31,24 @@ public class Main {
             System.exit(-1);
         }
 
+        // 2. Read fighters
         Fighters fighters = Fighters.fromYamlFighters(FighterReader.read(args));
         LOGGER.info("{}", fighters);
 
+        // 3. Let the user choose a fighter
         Fighter one = fighters.getAndRemove(ConsoleUtil.doConsoleInput());
-
         while (one == null) {
             LOGGER.info("There was no fighter for the specified ID.");
             one = fighters.getAndRemove(ConsoleUtil.doConsoleInput());
         }
 
+        // 4. Select a random enemy
         Fighter two = fighters.getRandom();
-
-        LOGGER.info("You've gone for player '{}'.", one.getName());
+        LOGGER.info("\nYou've gone for player '{}'.", one.getName());
         LOGGER.info("You are fighting against '{}'.", two.getName());
         ConsoleUtil.doInfo();
 
+        // 5. Play the game until one of the players has no health anymore
         while (one.getHealth() > 0 && two.getHealth() > 0) {
             healthInfo(one, two);
             if (fight(one, two, Mode.ATTACK) || fight(one, two, Mode.DEFENSE)) { break; }
@@ -64,7 +67,9 @@ public class Main {
      */
     private static boolean fight(Fighter one, Fighter two, Mode mode) {
         Fighter winner = Arena.fight(one, two, mode);
-        if (winner == null) { LOGGER.info("There was a tie."); } else {
+        if (winner == null) {
+            LOGGER.info("There was a tie.");
+        } else {
             LOGGER.info("\n\n<<< {} won the fight! >>>\n", winner.getName());
             Fighter loser = oppositeFighter(winner, one, two);
             return loser.getHealth() <= 0;
