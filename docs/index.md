@@ -193,6 +193,11 @@ choose a fighter and starts the game loop. When the user attacks, the enemy choo
 
 Since there is no single class for each player (they rather get dynamically load), there is no need for the use of inheritance and polymorphism.
 
+In fact, inheritance is quite outdated nowadays. The experience over the years showed that inheritance causes a lot of problems that are out
+of all proportion to the advantages. See [Liskov substitution principle](https://en.wikipedia.org/wiki/Liskov_substitution_principle) for more details.
+Today, the trend is more a mixture of procedural and object-oriented code, like Python supports it. By using this strategy, you combine the advantages
+of both paradigms.
+
 #### Access Modifiers
 
 Every class, method and field has the most restricting access modifier that's possible. Only the classes to parse the YAML file in
