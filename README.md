@@ -1,6 +1,7 @@
 # ConsoleArena
 
 ![GitHub Workflow build status badge](https://github.com/yannickkirschen/console-arena/workflows/Maven%20clean%20install/badge.svg)
+![GitHub Workflow build status badge](https://github.com/yannickkirschen/console-arena/workflows/Maven%20test/badge.svg)
 
 ## Overview
 
