@@ -48,11 +48,8 @@ public class Main {
 
         while (one.getHealth() > 0 && two.getHealth() > 0) {
             healthInfo(one, two);
-            if (fight(one, two, Mode.ATTACK) || fight(one, two, Mode.DEFENSE)) {
-                break;
-            }
+            if (fight(one, two, Mode.ATTACK) || fight(one, two, Mode.DEFENSE)) { break; }
         }
-
         LOGGER.info("{} won the game!", (one.getHealth() > 0 ? one : two).getName());
     }
 
