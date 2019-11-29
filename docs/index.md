@@ -25,6 +25,9 @@
         - [More Information](#more-information)
 - [Legal](#legal)
 
+![GitHub Workflow build status badge](https://github.com/yannickkirschen/console-arena/workflows/Maven%20clean%20install/badge.svg)
+![GitHub Workflow build status badge](https://github.com/yannickkirschen/console-arena/workflows/Maven%20test/badge.svg)
+
 ## Overview
 
 *ConsoleArena* is a free console fighting game written in Java and is part of a school project. The game allows
