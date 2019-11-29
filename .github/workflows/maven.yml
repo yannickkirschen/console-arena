@@ -9,10 +9,6 @@ jobs:
         steps:
             -   name: Clone
                 uses: actions/checkout@v1
-            -   name: Markdown Lint
-                uses: nosborn/github-action-markdown-cli@v1.1
-                with:
-                    files: .
             -   name: Set up JDK 13
                 uses: actions/setup-java@v1
                 with:
