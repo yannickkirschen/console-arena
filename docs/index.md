@@ -115,7 +115,7 @@ and how the files in these containers should be structured. See [apache.com](htt
 The key feature of Maven (and, frankly, the reason why everybody uses it), is the use of dependencies. Dependencies are JAR-files that
 have been built from a Maven project and uploaded to a repository.
 The main repository is the [Maven Central Repository](https://mvnrepository.com/repos/central). It contains more than 1 million artifacts (in 2019).
-It is also possible to host a private repository which makes Maven very interesting for the enterprise use, where you have code that should
+It is also possible to host a private repository which makes Maven very interesting for enterprise use, where you have code that should
 not be available in public.
 
 These are the dependencies I use for *ConsoleArena*:
@@ -187,6 +187,7 @@ The `com.github.yannickkirschen.school.arena.Arena` is the place where the fight
 
 *[power of skill one] + [power of player one] - [power of skill two] - [power of player two]*
 
+When the result is positive, the user (player one) won the fight, otherwise the computer (player two).
 The absolute value of this result is subtracted from the loser's health.
 
 The main method (in `com.github.yannickkirschen.school.arena.Main`) controls everything. It reads the YAML file with all fighters, lets the user
