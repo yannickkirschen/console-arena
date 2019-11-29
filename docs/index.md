@@ -127,7 +127,7 @@ and an easy adoption to a companies needs.
 
 These are the plugins I use for *ConsoleArena*:
 
-- `org.apache.maven.plugins.maven-dependency-plugin` -> Copy all dependencies into the JAR-file, making it a standalone application. Otherwise, the dependencies have to be in the classpath.
+- `org.apache.maven.plugins.maven-shade-plugin` (v3.2.1) -> Copy all dependencies into the JAR-file, making it a standalone application. Otherwise, the dependencies have to be in the classpath.
 - `org.apache.maven.plugins.maven-jar-plugin` (v3.2.0) -> Set the class with the main method, so the JAR can be executed.
 
 ### Design
