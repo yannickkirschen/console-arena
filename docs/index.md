@@ -1,3 +1,10 @@
+# ConsoleArena - Documentation
+
+![GitHub Workflow build status badge](https://github.com/yannickkirschen/console-arena/workflows/Maven%20clean%20install/badge.svg)
+![GitHub Workflow build status badge](https://github.com/yannickkirschen/console-arena/workflows/Maven%20test/badge.svg)
+
+=> [Repository](https://github.com/yannickkirschen/console-arena).
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -25,9 +32,6 @@
         - [More Information](#more-information)
 - [Legal](#legal)
 
-![GitHub Workflow build status badge](https://github.com/yannickkirschen/console-arena/workflows/Maven%20clean%20install/badge.svg)
-![GitHub Workflow build status badge](https://github.com/yannickkirschen/console-arena/workflows/Maven%20test/badge.svg)
-
 ## Overview
 
 *ConsoleArena* is a free console fighting game written in Java and is part of a school project. The game allows
@@ -38,8 +42,6 @@ decide how to defend.
 The game is finished when one of the players has no more health.
 
 ## Installation and Running
-
-You can clone the project [here](https://github.com/yannickkirschen/console-arena).
 
 ### Prerequisites
 
