@@ -52,7 +52,7 @@ There are two options to get *ConsoleArena*:
 
 #### Option 1: Cloning and building
 
-Go to https://github.com/yannickkirschen/console-arena and clone the repository. You also have to have
+Go to [github.com/yannickkirschen/console-arena](https://github.com/yannickkirschen/console-arena) and clone the repository. You also have to have
 [Apache Maven](https://maven.apache.org/) installed. When you are checking out the repo in an IDE, such as
 [IntelliJ IDEA](https://www.jetbrains.com/idea/), you don't have to install Maven.
 
