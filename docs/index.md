@@ -272,7 +272,7 @@ common bad-practises. When trying to commit, I get noticed when an issue is foun
 ## More Information
 
 If this documentation does not answer your questions, please refer to the Javadoc.
-You'll better start[here](https://github.com/yannickkirschen/console-arena/blob/master/src/main/java/com/github/yannickkirschen/school/arena/Main.java).
+You'll better start [here](https://github.com/yannickkirschen/console-arena/blob/master/src/main/java/com/github/yannickkirschen/school/arena/Main.java).
 
 ## Legal
 
