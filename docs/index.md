@@ -29,7 +29,7 @@
         - [Inheritance and Polymorphism](#inheritance-and-polymorphism)
         - [Access Modifiers](#access-modifiers)
         - [Object-Orientation?](#object-orientation)
-        - [The logger](#the-logger))
+        - [The logger](#the-logger)
         - [Quality Management](#quality-management)
         - [More Information](#more-information)
 - [Legal](#legal)
