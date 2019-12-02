@@ -34,6 +34,7 @@ documentation by the IHK (Chamber of Commerce and Industry).
     - [Object-Orientation?](#object-orientation)
     - [The logger](#the-logger)
     - [Quality Management](#quality-management)
+    - [Top-Down or Bottom-Up?](#top-down-or-bottom-up)
 - [More information](#more-information)
 - [Legal](#legal)
     
@@ -164,7 +165,10 @@ Here is a simple overview (*note: this is freestyle and no UML!*):
 
 ![Overview](img/Overview.png)
 
-Here is a simplified UML diagram (the classes for YAML parsing are left):
+Here is a simplified UML class-diagram. To focus on the relevant part of the application (where the actual business logic happens), the classes for
+YAML parsing are left in this diagram. I chose a class diagram in favour of other popular diagrams such as an activity or interaction overview diagram because
+it is an easy way to show the structure of an application. You can directly see what classes are involved and can dive right into the code. Other diagrams
+can be used as a specialization.
 
 ![UML](img/UML.png)
 
@@ -268,6 +272,15 @@ the structure of the project is fine.
 
 When developing, I use the SonarLint plugin, as well as the built-in code analysis by IntelliJ, to check the code for
 common bad-practises. When trying to commit, I get noticed when an issue is found and I can solve it.
+I chose these tools because they are the default ones for IntelliJ and there are no notable alternatives. Furthermore,
+SonarLint is compatible to the SonarQube server at work, where our build tool lints the code while building a project.
+You are able to connect SonarLint to the SonarQube server, so you have the same settings as in the build process later on.
+
+### Top-Down or Bottom-Up?
+
+During the implementation, I followed the bottom-up strategy. This agile approach allowed me to start implementing and testing
+the game very fast. Through 'inspect & adapt' I continuously thought about potential issues and thus improved the application.
+Since I've been working on my own, bottom-up was the only practicable way of working.
 
 ## More Information
 
