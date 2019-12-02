@@ -13,6 +13,9 @@
             - [Without IDE](#without-ide)
             - [With IDE](#with-ide)
         - [Option 2: Downloading the JAR](#option-2-downloading-the-jar)
+- [Play the game](#play-the-game)
+    - [Start](#start)
+    - [Fight](#fight)
 - [Architecture](#architecture)
     - [Java](#java)
     - [Maven](#maven)
@@ -26,6 +29,7 @@
         - [Inheritance and Polymorphism](#inheritance-and-polymorphism)
         - [Access Modifiers](#access-modifiers)
         - [Object-Orientation?](#object-orientation)
+        - [The logger](#the-logger))
         - [Quality Management](#quality-management)
         - [More Information](#more-information)
 - [Legal](#legal)
@@ -35,7 +39,7 @@
 *ConsoleArena* is a free console fighting game written in Java and is part of a school project. The game allows
 you to fight against the computer. In each fight you can choose how to attack the computer. The computer than reacts
 to your attack randomly. When each player has enogh health, the computer now chooses a random attack and you have to
-decide how to defend.
+decide how to defend. The style of play is similar to that of a quartet.
 
 The game is finished when one of the players has no more health.
 
@@ -78,7 +82,11 @@ The easiest way of running *ConsoleArena* is to download the JAR directly.
 Go to [Releases](https://github.com/yannickkirschen/console-arena/releases). Select the latest release and download the
 provided JAR file.
 
-In both ways you have to execute the JAR by:
+Have fun!
+
+## Play the game
+
+### Start
 
 ```bash
 java -jar target/console-arena-VERSION.jar
@@ -88,9 +96,40 @@ java -jar console-arena-VERSION.jar fighters.yml
 ```
 
 The `fighters.yml` can be provided by the user to allow custom characters.
-You can find the details down below.
+You can find the details [here](#yaml). Please note that cou cannot start the game in a non-interactive mode such as the terminal of an IDE. Please use
+your system's default terminal.
 
-Have fun! The game should be self-explanatory.
+Once you started the JAR, you'll get this screen:
+
+```
+Choose a player:
+0 - Vader (Power: 18)
+1 - Yoda (Power: 20)
+
+>
+```
+
+This is a list of all available players and their power. Whenever you see the `>` you can make an input.
+So, choose the fighter you want to play with (either `0` or `1`) and press enter.
+
+You'll get a little summary. The enemy is chosen randomly out of the remaining fighters. In our case, there is just one choice.
+
+```
+You've gone for player 'Yoda'.
+You are fighting against 'Vader'.
+Press any key to continue. You can press 'q' at any point in the game to quit.
+``` 
+
+### Fight
+
+As long as both fighters have a health greater than 0, the game loop runs. Each fight has the following steps:
+
+1. You choose an attack.
+2. The computer randomly chooses a defense.
+3. The result gets calculated (see [A fight](#a-fight)).
+4. The computer randomly chooses an attack.
+5. You choose a defense.
+6. The result gets calculated (see [A fight](#a-fight)).
 
 ## Architecture
 
@@ -222,6 +261,21 @@ One specification for the project was the development of an object-oriented app.
 notice that there are some classes that only have static methods. I decided to not implement these classes in an object-oriented manner, because in my
 opinion it looks nicer the way it is now. Utils should (almost) always be static anyway, in my opinion.
 
+#### The logger
+
+I use [Log4j](https://logging.apache.org/log4j/2.x/) for logging. When you play the game you'll notice that there are no "real" log messages (at least not
+one of those you are used to). Instead, I use the logging framework as a centralized way to control the output. The file `src/main/resources/log4j.properties`
+contains the properties for the logger. Inside this, you can see that the default target is set to `System.out`, which means that every call to the logger
+will be redirected to the default console. You could also configure this to write into a log file. You can see that the pattern of the output is `%m%n`. So
+each call to the logger would print the message (`%m`) and a new line (`%n`). Usually, you would use something like `[%d{yyyy-MM-dd HH:mm:ss}] %-5p %c{1} - %m%n`
+as the pattern which contains additional information such as the date and the time.
+
+Why do I use a logger instead of `System.out`? As I'm going to explain in the next paragraph, I use SonarLint for quality management. This plugin scans the code
+and marks common bad practices. Although you should check if a finding is really bad practice for your use-case, the plugin is often right. The use of
+`System.out` is seen as such a bad practice and SonarLint suggests to replace it by a logger. By doing this is, you are able to change the look of
+the output at one central place. Though I have to admit that `System.out` vs. a proper logger is definitely one of those endless controversial issues among
+developers.
+
 #### Quality Management
 
 There is a unit test that tests the parsing of the YAML file with all fighters. When there is a push to GitHub, a GitHub Action launches that builds the
@@ -232,7 +286,8 @@ commit, I get noticed when an issue is found and I can solve it.
 
 #### More Information
 
-If this documentation does not answer your questions, please refer to the JavaDoc.
+If this documentation does not answer your questions, please refer to the Javadoc.
+You'll better start [here](https://github.com/yannickkirschen/console-arena/blob/master/src/main/java/com/github/yannickkirschen/school/arena/Main.java).
 
 ## Legal
 
