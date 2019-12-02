@@ -52,7 +52,7 @@ Either clone the [repository](https://github.com/yannickkirschen/console-arena) 
 
 ### Build
 
-If you've cloned the repository, you have to build it with Maven (more on Maven later on):
+If you've cloned the repository, you have to build it with Maven (more on Maven [here](#maven)):
 
 ```bash
 mvn clean install
@@ -112,7 +112,7 @@ calculated by the formula:
 
 *[power of skill one] + [power of player one] - [power of skill two] - [power of player two]*
 
-When the result is positive, the user (player one) won the fight, otherwise the computer (player two).
+When the result is positive, player one won the fight, otherwise player two.
 The absolute value of this result is subtracted from the loser's health.
 
 ## Architecture
