@@ -19,10 +19,11 @@ final class ConsoleUtil {
     private ConsoleUtil() {}
 
     /**
-     * Checks, if the terminal runs in an interactive mode. If not, the application quits with a status code of -1. A non-interactive mode may be the terminal
-     * in an IDE.
+     * Checks, if the terminal runs in an interactive mode.
+     *
+     * @throws NonInteractiveModeException If we are in an non-interactive mode.
      */
-    static void ensureNonInteractiveMode() throws NonInteractiveModeException {
+    static void ensureInteractiveMode() throws NonInteractiveModeException {
         if (CONSOLE == null) { throw new NonInteractiveModeException(); }
     }
 

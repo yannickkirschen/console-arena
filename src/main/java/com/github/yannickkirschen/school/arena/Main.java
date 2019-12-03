@@ -22,38 +22,77 @@ import org.slf4j.LoggerFactory;
 public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
+    private Fighters fighters;
+    private Fighter one;
+    private Fighter two;
+
     public static void main(String[] args) {
-        // 1. Ensure non-interactive mode (the game must be started in a normal terminal, not in the IDE)
-        try {
-            ConsoleUtil.ensureNonInteractiveMode();
-        } catch (NonInteractiveModeException e) {
-            LOGGER.error("No console: non-interactive mode!");
-            System.exit(-1);
-        }
+        new Main().loop(args);
+    }
 
-        // 2. Read fighters
-        Fighters fighters = Fighters.fromYamlFighters(FighterReader.read(args));
-        LOGGER.info("{}", fighters);
+    /**
+     * The main loop of the game.
+     *
+     * @param args The command line arguments.
+     */
+    private void loop(String[] args) {
+        ensureInteractiveMode();
+        readFighters(args);
+        chooseFighter();
+        chooseEnemy();
 
-        // 3. Let the user choose a fighter
-        Fighter one = fighters.getAndRemove(ConsoleUtil.doConsoleInput());
-        while (one == null) {
-            LOGGER.info("There was no fighter for the specified ID.");
-            one = fighters.getAndRemove(ConsoleUtil.doConsoleInput());
-        }
-
-        // 4. Select a random enemy
-        Fighter two = fighters.getRandom();
-        LOGGER.info("\nYou've gone for player '{}'.", one.getName());
-        LOGGER.info("You are fighting against '{}'.", two.getName());
-        ConsoleUtil.doInfo();
-
-        // 5. Play the game until one of the players has no health anymore
         while (one.getHealth() > 0 && two.getHealth() > 0) {
             healthInfo(one, two);
             if (fight(one, two, Mode.ATTACK) || fight(one, two, Mode.DEFENSE)) { break; }
         }
         LOGGER.info("{} won the game!", (one.getHealth() > 0 ? one : two).getName());
+    }
+
+    /**
+     * Ensures that we are in an interactive mode. If not, the application quits with an exit code of -1.
+     */
+    private void ensureInteractiveMode() {
+        try {
+            ConsoleUtil.ensureInteractiveMode();
+        } catch (NonInteractiveModeException e) {
+            LOGGER.error("No console: non-interactive mode!");
+            System.exit(-1);
+        }
+    }
+
+    /**
+     * Reads all fighters either from the provided or the default YAML file.
+     *
+     * @param args The command line arguments.
+     */
+    private void readFighters(String[] args) {
+        fighters = Fighters.fromYamlFighters(FighterReader.read(args));
+        if (fighters.amount() < 2) {
+            LOGGER.info("There must be at least 2 fighters.");
+            System.exit(-1);
+        }
+        LOGGER.info("{}", fighters);
+    }
+
+    /**
+     * Lets the user choose a fighter to play with.
+     */
+    private void chooseFighter() {
+        one = fighters.getAndRemove(ConsoleUtil.doConsoleInput());
+        while (one == null) {
+            LOGGER.info("There was no fighter for the specified ID.");
+            one = fighters.getAndRemove(ConsoleUtil.doConsoleInput());
+        }
+    }
+
+    /**
+     * Randomly chooses an enemy.
+     */
+    private void chooseEnemy() {
+        two = fighters.getRandom();
+        LOGGER.info("\nYou've gone for player '{}'.", one.getName());
+        LOGGER.info("You are fighting against '{}'.", two.getName());
+        ConsoleUtil.doInfo();
     }
 
     /**
@@ -65,7 +104,7 @@ public class Main {
      *
      * @return <code>true</code>, if the loser of the fight has no more health (and the game is over). Otherwise <code>false</code>.
      */
-    private static boolean fight(Fighter one, Fighter two, Mode mode) {
+    private boolean fight(Fighter one, Fighter two, Mode mode) {
         Fighter winner = Arena.fight(one, two, mode);
         if (winner == null) {
             LOGGER.info("There was a tie.");
@@ -87,7 +126,7 @@ public class Main {
      *
      * @return The opposite fighter of <code>actual</code>.
      */
-    private static Fighter oppositeFighter(Fighter actual, Fighter one, Fighter two) { return actual.equals(one) ? two : one; }
+    private Fighter oppositeFighter(Fighter actual, Fighter one, Fighter two) { return actual.equals(one) ? two : one; }
 
     /**
      * Prints the health of two fighters.
@@ -95,7 +134,7 @@ public class Main {
      * @param one The first fighter.
      * @param two The second fighter.
      */
-    private static void healthInfo(Fighter one, Fighter two) {
+    private void healthInfo(Fighter one, Fighter two) {
         LOGGER.info("{}'s health: {}", one.getName(), one.getHealth());
         LOGGER.info("{}'s health: {}", two.getName(), two.getHealth());
     }
