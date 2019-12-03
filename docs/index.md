@@ -165,16 +165,20 @@ Here is a simple overview (*note: this is freestyle and no UML!*):
 
 ![Overview](img/Overview.png)
 
-Here is a simplified UML class-diagram. To focus on the relevant part of the application (where the actual business logic happens), the classes for
-YAML parsing are left in this diagram. I chose a class diagram in favour of other popular diagrams such as an activity or interaction overview diagram because
-it is an easy way to show the structure of an application. You can directly see what classes are involved and can dive right into the code. Other diagrams
-can be used as a specialization.
+Here is a simplified UML class-diagram. To focus on the relevant part of the application (where the actual business logic happens),
+the classes for YAML parsing are left in this diagram. I chose a class diagram in favour of other popular diagrams such as an activity
+or interaction overview diagram because it is an easy way to show the structure of an application and the relations between objects. You can directly
+see what classes are involved and can dive right into the code. Other diagrams can be used as a specialization.
+
+Often, you only reveal the public fields and methods, to show how your objects can be accessed. I decided to reveal all fields and methods, because
+it often helps understanding how an application works.
 
 ![UML](img/UML.png)
 
-The main method (in `com.github.yannickkirschen.school.arena.Main`) controls everything. It reads the YAML file with
-all fighters, lets the user choose a fighter and starts the game loop. When the user attacks, the enemy chooses its
-defense randomly and vice-versa.
+The main method (in `com.github.yannickkirschen.school.arena.Main`) starts the game. It reads the fighters from the YAML file, lets the
+user choose a fighter and randomly chooses a fighter as the enemy.
+
+Finally, the main match loop is started.
 
 ### YAML
 
@@ -240,10 +244,9 @@ This ensures, that these classes are instantiated the right way. See the UML dia
 
 ### Object-Orientation?
 
-One specification for the project was the development of an object-oriented app. When you read the code (or take a look
-at the UML diagram), you'll notice that there are some classes that only have static methods. I decided to not implement
-these classes in an object-oriented manner, because in my opinion it looks nicer the way it is now. Utils should
-(almost) always be static anyway, in my opinion.
+One specification for the project was the development of an object-oriented app. When you read the code, you'll notice that
+`com.github.yannickkirschen.school.arena.ConsoleUtil` only has static methods. I decided to not implement this class in an
+object-oriented manner, because in my opinion it looks nicer the way it is now. I like simple utils to be static.
 
 ### The logger
 

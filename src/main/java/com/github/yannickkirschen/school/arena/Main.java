@@ -27,27 +27,10 @@ public class Main {
 
     public static void main(String[] args) {
         ensureInteractiveMode();
-
-        List<Fighter> fighters = FighterReader.read(args).asFighters();
-        if (fighters.size() < 2) {
-            LOGGER.info("There must be at least 2 fighters.");
-            System.exit(-1);
-        }
-
-        LOGGER.info("Choose a player:");
-        for (Fighter fighter : fighters) {
-            LOGGER.info("{} - {} (Power: {})", fighter.getId(), fighter.getName(), fighter.getPower());
-        }
-        LOGGER.info("\n");
-
-        Fighter player = fighters.get(ConsoleUtil.doConsoleInput());
-        while (player == null) {
-            LOGGER.info("There was no fighter for the specified ID.");
-            player = fighters.get(ConsoleUtil.doConsoleInput());
-        }
-        fighters.remove(player);
-
+        List<Fighter> fighters = readFighters(args);
+        Fighter player = choosePlayer(fighters);
         Fighter enemy = fighters.get(new Random().nextInt(fighters.size()));
+
         LOGGER.info("\nYou've gone for player '{}'.", player.getName());
         LOGGER.info("You are fighting against '{}'.", enemy.getName());
         ConsoleUtil.doInfo();
@@ -65,5 +48,46 @@ public class Main {
             LOGGER.error("No console: non-interactive mode!");
             System.exit(-1);
         }
+    }
+
+    /**
+     * Reads the fighters from the YAML file based on the command line argument. Reads the default file if no argument is provided.
+     * <p>
+     * If there are less than two fighters, the application quits with an exit code of -1.
+     *
+     * @param args The command line arguments.
+     *
+     * @return
+     */
+    private static List<Fighter> readFighters(String[] args) {
+        List<Fighter> fighters = FighterReader.read(args).asFighters();
+        if (fighters.size() < 2) {
+            LOGGER.info("There must be at least 2 fighters.");
+            System.exit(-1);
+        }
+        return fighters;
+    }
+
+    /**
+     * Lets the user choose a player based on a list of fighters.
+     *
+     * @param fighters The list of fighters to present the user.
+     *
+     * @return The chosen fighter.
+     */
+    private static Fighter choosePlayer(List<Fighter> fighters) {
+        LOGGER.info("Choose a player:");
+        for (Fighter fighter : fighters) {
+            LOGGER.info("{} - {} (Power: {})", fighter.getId(), fighter.getName(), fighter.getPower());
+        }
+        LOGGER.info("\n");
+
+        Fighter player = fighters.get(ConsoleUtil.doConsoleInput());
+        while (player == null) {
+            LOGGER.info("There was no fighter for the specified ID.");
+            player = fighters.get(ConsoleUtil.doConsoleInput());
+        }
+        fighters.remove(player);
+        return player;
     }
 }

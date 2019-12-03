@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 public class Match {
     private static final Logger LOGGER = LoggerFactory.getLogger(Match.class);
 
+    private Arena arena = new Arena();
+
     private Fighter player;
     private Fighter computer;
 
@@ -25,14 +27,14 @@ public class Match {
     }
 
     /**
-     * Does the actual fight of two fighters. Checks, if the loser of this fight has lost the game.
+     * Lets the player and the computer fight against each other. Checks, if the loser of this fight has lost the game.
      *
-     * @param mode The mode of the fight (attack/defend)
+     * @param mode The mode of the fight (attack/defend) for the player.
      *
      * @return <code>true</code>, if the loser of the fight has no more health (and the game is over). Otherwise <code>false</code>.
      */
     private boolean fight(Mode mode) {
-        Fighter winner = Arena.fight(player, computer, mode);
+        Fighter winner = arena.fight(player, computer, mode);
         if (winner == null) {
             LOGGER.info("There was a tie.");
         } else {

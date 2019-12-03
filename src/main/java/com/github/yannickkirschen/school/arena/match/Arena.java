@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 public final class Arena {
     private static final Logger LOGGER = LoggerFactory.getLogger(Arena.class);
 
-    private Arena() {}
+    Arena() {}
 
     /**
      * Does the actual fight. The two fighters provided fight against each other by using a simple mathematical formula. The player (one) defines which action
@@ -43,7 +43,7 @@ public final class Arena {
      *
      * @return The fighter who won the match.
      */
-    public static Fighter fight(Fighter one, Fighter two, Mode modeOfFirstPlayer) {
+    Fighter fight(Fighter one, Fighter two, Mode modeOfFirstPlayer) {
         String s1 = modeOfFirstPlayer == Mode.ATTACK ? "attacks" : "defends";
         String s2 = modeOfFirstPlayer == Mode.ATTACK ? "defends" : "attacks";
 
@@ -85,12 +85,12 @@ public final class Arena {
      *
      * @return The skill the user chose.
      */
-    private static Skill getSkillOfUser(Fighter fighter, Mode mode) {
+    private Skill getSkillOfUser(Fighter fighter, Mode mode) {
         LOGGER.info(fighter.skillsAsString(mode));
-        Skill skill = getSkillOfFighter(fighter, mode);
+        Skill skill = fighter.getSkills(mode).get(ConsoleUtil.doConsoleInput());
         while (skill == null) {
             LOGGER.info("There was no skill for the specified ID.");
-            skill = getSkillOfFighter(fighter, mode);
+            skill = fighter.getSkills(mode).get(ConsoleUtil.doConsoleInput());
         }
         return skill;
     }
@@ -104,21 +104,9 @@ public final class Arena {
      *
      * @return The skill the computer chose.
      */
-    private static Skill getSkillOfComputer(Fighter fighter, Mode mode, String s) {
+    private Skill getSkillOfComputer(Fighter fighter, Mode mode, String s) {
         Skill skill = fighter.getRandomSkill(mode);
         LOGGER.info("\n\n!!! {} {} with '{}'.", fighter.getName(), s, skill.getName());
         return skill;
-    }
-
-    /**
-     * Selects a skill of a fighter for a specific mode based on the choice of the user.
-     *
-     * @param fighter The fighter to get the skill of.
-     * @param mode    The mode of the skill to get.
-     *
-     * @return The selected skill. <code>null</code>, if there was no skill for the user's input.
-     */
-    private static Skill getSkillOfFighter(Fighter fighter, Mode mode) {
-        return fighter.getSkills(mode).get(ConsoleUtil.doConsoleInput());
     }
 }
