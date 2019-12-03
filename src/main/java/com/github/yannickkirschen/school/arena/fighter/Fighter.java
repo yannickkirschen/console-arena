@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 /**
  * A {@link Fighter} represents a character in the console game. A fighter has an unique ID, a unique name, a power, skills and a health.
@@ -34,20 +33,10 @@ public final class Fighter {
     private final Integer id;
     private final String name;
     private final Integer power;
-    private final List<Skill> skills = new LinkedList<>();
     private Integer health = 100;
 
-    /**
-     * This list allows an easier access to all attacks of a fighter. It gets filled at the first call to {@link #getSkills(Mode)} with mode =
-     * <code>Mode.ATTACK</code>.
-     */
-    private List<Skill> attacks;
-
-    /**
-     * This list allows an easier access to all defenses of a fighter. It gets filled at the first call to {@link #getSkills(Mode)} with mode =
-     * <code>Mode.DEFENSE</code>.
-     */
-    private List<Skill> defenses;
+    private List<Skill> attacks = new LinkedList<>();
+    private List<Skill> defenses = new LinkedList<>();
 
     private Fighter(Integer id, String name, Integer power) {
         this.id = id;
@@ -69,13 +58,13 @@ public final class Fighter {
         // Extract attacks
         List<YamlSkill> attacks = yamlFighter.getAttacks();
         for (int i = 0; i < attacks.size(); i++) {
-            fighter.addSkill(Skill.fromYamlSkill(attacks.get(i), Mode.ATTACK, i));
+            fighter.addAttack(Skill.fromYamlSkill(attacks.get(i), Mode.ATTACK, i));
         }
 
         // Extract defenses.
         List<YamlSkill> defenses = yamlFighter.getDefenses();
         for (int i = 0; i < defenses.size(); i++) {
-            fighter.addSkill(Skill.fromYamlSkill(defenses.get(i), Mode.DEFENSE, i));
+            fighter.addDefense(Skill.fromYamlSkill(defenses.get(i), Mode.DEFENSE, i));
         }
 
         return fighter;
@@ -126,10 +115,6 @@ public final class Fighter {
         return skillList.get(new Random().nextInt(skillList.size()));
     }
 
-    private void addSkill(Skill skill) { skills.add(skill); }
-
-    Integer getId() { return id; }
-
     public String getName() { return name; }
 
     public Integer getPower() { return power; }
@@ -143,14 +128,9 @@ public final class Fighter {
      */
     public List<Skill> getSkills(Mode mode) {
         if (mode == Mode.ATTACK) {
-            if (attacks == null) {
-                attacks = skills.stream().parallel().filter(skill -> skill.getType() == Mode.ATTACK).collect(Collectors.toList());
-            }
+
             return attacks;
         } else if (mode == Mode.DEFENSE) {
-            if (defenses == null) {
-                defenses = skills.stream().parallel().filter(skill -> skill.getType() == Mode.DEFENSE).collect(Collectors.toList());
-            }
             return defenses;
         }
         return new LinkedList<>();
@@ -158,13 +138,18 @@ public final class Fighter {
 
     public Integer getHealth() { return health; }
 
+    Integer getId() { return id; }
+
+    private void addAttack(Skill skill) { attacks.add(skill); }
+
+    private void addDefense(Skill skill) { defenses.add(skill); }
+
     @Override
     public String toString() {
         return "Fighter{" +
             "id=" + id +
             ", name='" + name + '\'' +
             ", power=" + power +
-            ", skills=" + skills +
             '}';
     }
 
