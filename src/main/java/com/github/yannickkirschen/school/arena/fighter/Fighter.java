@@ -24,7 +24,6 @@ import java.util.Random;
  * Instantiation is only possible via {@link #fromYamlFighter(YamlFighter, Integer)}.
  *
  * @author Yannick Kirschen
- * @see Fighters
  * @see Skill
  * @see Mode
  * @since 1.0.0
@@ -52,19 +51,19 @@ public final class Fighter {
      *
      * @return A new fighter based on the one read from the YAML file.
      */
-    static Fighter fromYamlFighter(YamlFighter yamlFighter, Integer id) {
+    public static Fighter fromYamlFighter(YamlFighter yamlFighter, Integer id) {
         Fighter fighter = new Fighter(id, yamlFighter.getName(), yamlFighter.getPower());
 
         // Extract attacks
         List<YamlSkill> attacks = yamlFighter.getAttacks();
         for (int i = 0; i < attacks.size(); i++) {
-            fighter.addAttack(Skill.fromYamlSkill(attacks.get(i), Mode.ATTACK, i));
+            fighter.addAttack(Skill.fromYamlSkill(attacks.get(i), i));
         }
 
         // Extract defenses.
         List<YamlSkill> defenses = yamlFighter.getDefenses();
         for (int i = 0; i < defenses.size(); i++) {
-            fighter.addDefense(Skill.fromYamlSkill(defenses.get(i), Mode.DEFENSE, i));
+            fighter.addDefense(Skill.fromYamlSkill(defenses.get(i), i));
         }
 
         return fighter;
@@ -115,10 +114,6 @@ public final class Fighter {
         return skillList.get(new Random().nextInt(skillList.size()));
     }
 
-    public String getName() { return name; }
-
-    public Integer getPower() { return power; }
-
     /**
      * Selects all skill of a specific mode.
      *
@@ -136,9 +131,13 @@ public final class Fighter {
         return new LinkedList<>();
     }
 
-    public Integer getHealth() { return health; }
+    public Integer getId() { return id; }
 
-    Integer getId() { return id; }
+    public String getName() { return name; }
+
+    public Integer getPower() { return power; }
+
+    public Integer getHealth() { return health; }
 
     private void addAttack(Skill skill) { attacks.add(skill); }
 

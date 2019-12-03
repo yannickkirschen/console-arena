@@ -234,7 +234,6 @@ this is bad practise. The IDE would grumble otherwise.
 The following classes can only be instantiated via a static method called `getFromYamlXXX()`:
 
 - `com.github.yannickkirschen.school.arena.fighter.Fighter`
-- `com.github.yannickkirschen.school.arena.fighter.Fighters`
 - `com.github.yannickkirschen.school.arena.fighter.Skill`
 
 This ensures, that these classes are instantiated the right way. See the UML diagram for more information.

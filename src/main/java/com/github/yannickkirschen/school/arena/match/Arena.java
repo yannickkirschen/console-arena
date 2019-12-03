@@ -1,5 +1,6 @@
-package com.github.yannickkirschen.school.arena;
+package com.github.yannickkirschen.school.arena.match;
 
+import com.github.yannickkirschen.school.arena.ConsoleUtil;
 import com.github.yannickkirschen.school.arena.fighter.Fighter;
 import com.github.yannickkirschen.school.arena.fighter.Mode;
 import com.github.yannickkirschen.school.arena.fighter.Skill;
@@ -15,7 +16,7 @@ import org.slf4j.LoggerFactory;
  * @see Skill
  * @since 1.0.0
  */
-final class Arena {
+public final class Arena {
     private static final Logger LOGGER = LoggerFactory.getLogger(Arena.class);
 
     private Arena() {}
@@ -42,7 +43,7 @@ final class Arena {
      *
      * @return The fighter who won the match.
      */
-    static Fighter fight(Fighter one, Fighter two, Mode modeOfFirstPlayer) {
+    public static Fighter fight(Fighter one, Fighter two, Mode modeOfFirstPlayer) {
         String s1 = modeOfFirstPlayer == Mode.ATTACK ? "attacks" : "defends";
         String s2 = modeOfFirstPlayer == Mode.ATTACK ? "defends" : "attacks";
 

@@ -1,13 +1,13 @@
 package com.github.yannickkirschen.school.arena.fighter;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * The {@link YamlFighters} are only used as a transport object to parse all fighters from the YAML file into it. See {@link Fighters} for more details.
+ * The {@link YamlFighters} are only used as a transport object to parse all fighters from the YAML file into it.
  *
  * @author Yannick Kirschen
- * @see Fighters
  * @since 1.0.0
  */
 public final class YamlFighters {
@@ -15,6 +15,16 @@ public final class YamlFighters {
 
     public YamlFighters() {
         // Needed for YAML serialization
+    }
+
+    public List<Fighter> asFighters() {
+        List<Fighter> fighterList = new LinkedList<>();
+
+        for (int i = 0; i < fighters.size(); i++) {
+            fighterList.add(Fighter.fromYamlFighter(fighters.get(i), i));
+        }
+
+        return fighterList;
     }
 
     public List<YamlFighter> getFighters() { return fighters; }
