@@ -61,6 +61,11 @@ public final class Fighters {
      */
     public Fighter getRandom() { return fighterList.get(new Random().nextInt(fighterList.size())); }
 
+    /**
+     * @return The number of available fighters.
+     */
+    public Integer amount() { return fighterList.size(); }
+
     private void addFighter(Fighter fighter) { fighterList.add(fighter); }
 
     /**
