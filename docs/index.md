@@ -165,13 +165,15 @@ Here is a simple overview (*note: this is freestyle and no UML!*):
 
 ![Overview](img/Overview.png)
 
-Here is a simplified UML class-diagram. To focus on the relevant part of the application (where the actual business logic happens),
+Down below is a simplified UML class-diagram. To focus on the relevant part of the application (where the actual business logic happens),
 the classes for YAML parsing are left in this diagram. I chose a class diagram in favour of other popular diagrams such as an activity
 or interaction overview diagram because it is an easy way to show the structure of an application and the relations between objects. You can directly
 see what classes are involved and can dive right into the code. Other diagrams can be used as a specialization.
 
 Often, you only reveal the public fields and methods, to show how your objects can be accessed. I decided to reveal all fields and methods, because
 it often helps understanding how an application works.
+
+Since a class diagram should only display the relations between objects, utils, enums, and the class with the main method are left out.
 
 ![UML](img/UML.png)
 
@@ -288,6 +290,12 @@ Since I've been working on my own, bottom-up was the only practicable way of wor
 
 If this documentation does not answer your questions, please refer to the Javadoc.
 You'll better start [here](https://github.com/yannickkirschen/console-arena/blob/master/src/main/java/com/github/yannickkirschen/school/arena/Main.java).
+
+See also:
+
+- [Contributing](https://github.com/yannickkirschen/console-arena/blob/master/CONTRIBUTING.md)
+- [Code of conduct](https://github.com/yannickkirschen/console-arena/blob/master/CODE_OF_CONDUCT.md)
+- [Changelog](https://github.com/yannickkirschen/console-arena/blob/master/CHANGELOG.md)
 
 ## Legal
 
