@@ -18,12 +18,10 @@ import java.util.Objects;
  * @since 1.0.0
  */
 public final class Skill {
-    private final Integer id;
     private final String name;
     private final Integer power;
 
-    private Skill(Integer id, String name, Integer power) {
-        this.id = id;
+    private Skill(String name, Integer power) {
         this.name = name;
         this.power = power;
     }
@@ -32,15 +30,12 @@ public final class Skill {
      * Constructs a new skill from a {@link YamlSkill}.
      *
      * @param yamlSkill The skill read from the YAML file with all fighters to create the fighter from.
-     * @param id        The ID of the new skill. Must be unique.
      *
      * @return A new skill based on the one read from the YAML file.
      */
-    static Skill fromYamlSkill(YamlSkill yamlSkill, Integer id) {
-        return new Skill(id, yamlSkill.getName(), yamlSkill.getPower());
+    static Skill fromYamlSkill(YamlSkill yamlSkill) {
+        return new Skill(yamlSkill.getName(), yamlSkill.getPower());
     }
-
-    Integer getId() { return id; }
 
     public String getName() { return name; }
 
@@ -49,7 +44,6 @@ public final class Skill {
     @Override
     public String toString() {
         return "Skill{" +
-            "id=" + id +
             ", name='" + name + '\'' +
             ", power=" + power +
             '}';
@@ -60,9 +54,9 @@ public final class Skill {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
         Skill skill = (Skill) o;
-        return id.equals(skill.id) && name.equals(skill.name);
+        return name.equals(skill.name);
     }
 
     @Override
-    public int hashCode() { return Objects.hash(id, name); }
+    public int hashCode() { return Objects.hash(name); }
 }

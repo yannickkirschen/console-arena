@@ -20,8 +20,8 @@ public final class YamlFighters {
     public List<Fighter> asFighters() {
         List<Fighter> fighterList = new LinkedList<>();
 
-        for (int i = 0; i < fighters.size(); i++) {
-            fighterList.add(Fighter.fromYamlFighter(fighters.get(i), i));
+        for (YamlFighter fighter : fighters) {
+            fighterList.add(Fighter.fromYamlFighter(fighter));
         }
 
         return fighterList;

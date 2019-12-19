@@ -8,10 +8,10 @@ import org.slf4j.LoggerFactory;
 public class Match {
     private static final Logger LOGGER = LoggerFactory.getLogger(Match.class);
 
-    private Arena arena = new Arena();
+    private final Arena arena = new Arena();
 
-    private Fighter player;
-    private Fighter computer;
+    private final Fighter player;
+    private final Fighter computer;
 
     public Match(Fighter player, Fighter computer) {
         this.player = player;

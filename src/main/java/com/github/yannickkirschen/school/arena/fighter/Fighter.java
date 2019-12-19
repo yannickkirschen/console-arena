@@ -8,8 +8,7 @@ import java.util.Random;
 /**
  * A {@link Fighter} represents a character in the console game. A fighter has an unique ID, a unique name, a power, skills and a health.
  * <p>
- * The ID gets generated when reading the YAML file with all fighters. Its only purpose is to allow an easy selection of a fighter in the console. Though the ID
- * allows identifying a fighter, the name must also be unique, so that it does not lead to misunderstandings.
+ * The name must be unique, so that it does not lead to misunderstandings.
  * <p>
  * The power is an abstract value, saying how strong a fighter is. It is used to calculate, whether a player won or lost a fight.
  * <p>
@@ -19,9 +18,9 @@ import java.util.Random;
  * The fighter's default health is 100. It gets decreased when the fighter lost a fight and cannot be increased. Basically, the result of the fight calculation
  * gets subtracted from the health.
  * <p>
- * Two fighters are equal to each other when their IDs and names are equal.
+ * Two fighters are equal to each other when their names are equal.
  * <p>
- * Instantiation is only possible via {@link #fromYamlFighter(YamlFighter, Integer)}.
+ * Instantiation is only possible via {@link #fromYamlFighter(YamlFighter)}.
  *
  * @author Yannick Kirschen
  * @see Skill
@@ -29,16 +28,14 @@ import java.util.Random;
  * @since 1.0.0
  */
 public final class Fighter {
-    private final Integer id;
     private final String name;
     private final Integer power;
+    private final List<Skill> attacks = new LinkedList<>();
+    private final List<Skill> defenses = new LinkedList<>();
+
     private Integer health = 100;
 
-    private List<Skill> attacks = new LinkedList<>();
-    private List<Skill> defenses = new LinkedList<>();
-
-    private Fighter(Integer id, String name, Integer power) {
-        this.id = id;
+    private Fighter(String name, Integer power) {
         this.name = name;
         this.power = power;
     }
@@ -47,23 +44,20 @@ public final class Fighter {
      * Constructs a new fighter from a {@link YamlFighter}.
      *
      * @param yamlFighter The fighter read from the YAML file with all fighters to create the fighter from.
-     * @param id          The ID of the new fighter. Must be unique.
      *
      * @return A new fighter based on the one read from the YAML file.
      */
-    public static Fighter fromYamlFighter(YamlFighter yamlFighter, Integer id) {
-        Fighter fighter = new Fighter(id, yamlFighter.getName(), yamlFighter.getPower());
+    public static Fighter fromYamlFighter(YamlFighter yamlFighter) {
+        Fighter fighter = new Fighter(yamlFighter.getName(), yamlFighter.getPower());
 
         // Extract attacks
-        List<YamlSkill> attacks = yamlFighter.getAttacks();
-        for (int i = 0; i < attacks.size(); i++) {
-            fighter.addAttack(Skill.fromYamlSkill(attacks.get(i), i));
+        for (YamlSkill attack : yamlFighter.getAttacks()) {
+            fighter.addAttack(Skill.fromYamlSkill(attack));
         }
 
-        // Extract defenses.
-        List<YamlSkill> defenses = yamlFighter.getDefenses();
-        for (int i = 0; i < defenses.size(); i++) {
-            fighter.addDefense(Skill.fromYamlSkill(defenses.get(i), i));
+        // Extract defenses
+        for (YamlSkill defense : yamlFighter.getDefenses()) {
+            fighter.addDefense(Skill.fromYamlSkill(defense));
         }
 
         return fighter;
@@ -95,8 +89,10 @@ public final class Fighter {
     public String skillsAsString(Mode mode) {
         StringBuilder sb = new StringBuilder().append("\n").append("How do you want to ").append(mode == Mode.ATTACK ? "attack" : "defend").append("?");
 
-        for (Skill skill : getSkills(mode)) {
-            sb.append("\n").append(skill.getId()).append(" - ").append(skill.getName()).append("(Power: ").append(skill.getPower()).append(")");
+        List<Skill> skills = getSkills(mode);
+        for (int i = 0; i < skills.size(); i++) {
+            Skill skill = skills.get(i);
+            sb.append("\n").append(i).append(" - ").append(skill.getName()).append(" (Power: ").append(skill.getPower()).append(")");
         }
 
         return sb.append("\n").toString();
@@ -131,8 +127,6 @@ public final class Fighter {
         return new LinkedList<>();
     }
 
-    public Integer getId() { return id; }
-
     public String getName() { return name; }
 
     public Integer getPower() { return power; }
@@ -146,7 +140,6 @@ public final class Fighter {
     @Override
     public String toString() {
         return "Fighter{" +
-            "id=" + id +
             ", name='" + name + '\'' +
             ", power=" + power +
             '}';
@@ -157,9 +150,9 @@ public final class Fighter {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
         Fighter fighter = (Fighter) o;
-        return id.equals(fighter.id) && name.equals(fighter.name);
+        return name.equals(fighter.name);
     }
 
     @Override
-    public int hashCode() { return Objects.hash(id, name); }
+    public int hashCode() { return Objects.hash(name); }
 }
