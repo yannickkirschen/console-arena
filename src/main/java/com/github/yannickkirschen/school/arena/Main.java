@@ -57,7 +57,7 @@ public class Main {
      *
      * @param args The command line arguments.
      *
-     * @return
+     * @return All fighter from the YAML file.
      */
     private static List<Fighter> readFighters(String[] args) {
         List<Fighter> fighters = FighterReader.read(args).asFighters();
@@ -77,8 +77,10 @@ public class Main {
      */
     private static Fighter choosePlayer(List<Fighter> fighters) {
         LOGGER.info("Choose a player:");
-        for (Fighter fighter : fighters) {
-            LOGGER.info("{} - {} (Power: {})", fighter.getId(), fighter.getName(), fighter.getPower());
+
+        for (int i = 0; i < fighters.size(); i++) {
+            Fighter fighter = fighters.get(i);
+            LOGGER.info("{} - {} (Power: {})", i, fighter.getName(), fighter.getPower());
         }
         LOGGER.info("\n");
 
