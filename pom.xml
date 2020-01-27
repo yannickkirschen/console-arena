@@ -45,7 +45,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <yaml.version>1.25</yaml.version>
-        <log4j.version>1.7.28</log4j.version>
+        <log4j.version>1.7.30</log4j.version>
         <junit.version>4.12</junit.version>
         <maven.jar.plugin.version>3.2.0</maven.jar.plugin.version>
         <maven.shade.plugin.version>3.2.1</maven.shade.plugin.version>
