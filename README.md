@@ -2,6 +2,7 @@
 
 ![GitHub Workflow build status badge](https://github.com/yannickkirschen/console-arena/workflows/Maven%20clean%20install/badge.svg)
 ![GitHub Workflow build status badge](https://github.com/yannickkirschen/console-arena/workflows/Maven%20test/badge.svg)
+[![](https://api.dependabot.com/badges/status?host=github&repo=yannickkirschen/console-arena)](https://dependabot.com)
 
 ## Overview
 
