@@ -12,32 +12,6 @@
     <description>ConsoleArena is a free console fighting game written in Java and is part of a school project.</description>
     <url>https://github.com/yannickkirschen/console-arena</url>
 
-    <inceptionYear>2019</inceptionYear>
-
-    <licenses>
-        <license>
-            <name>MIT License</name>
-            <url>https://github.com/yannickkirschen/console-arena/blob/master/LICENSE</url>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <name>Yannick Kirschen</name>
-            <email>github.yannickkirschen@protonmail.com</email>
-        </developer>
-    </developers>
-
-    <issueManagement>
-        <system>GitHub Issues</system>
-        <url>https://github.com/yannickkirschen/console-arena/issues</url>
-    </issueManagement>
-
-    <ciManagement>
-        <system>GitHub Actions</system>
-        <url>https://github.com/yannickkirschen/console-arena/actions</url>
-    </ciManagement>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -45,6 +19,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <yaml.version>1.26</yaml.version>
+        <lombok.version>1.18.12</lombok.version>
         <log4j.version>1.7.28</log4j.version>
         <junit.version>4.12</junit.version>
         <maven.jar.plugin.version>3.2.0</maven.jar.plugin.version>
@@ -56,6 +31,12 @@
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>${yaml.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
         </dependency>
 
         <dependency>

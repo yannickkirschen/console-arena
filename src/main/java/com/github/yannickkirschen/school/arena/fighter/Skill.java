@@ -1,5 +1,8 @@
 package com.github.yannickkirschen.school.arena.fighter;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import java.util.Objects;
 
 /**
@@ -17,8 +20,12 @@ import java.util.Objects;
  * @see Mode
  * @since 1.0.0
  */
+@ToString
 public final class Skill {
+    @Getter
     private final String name;
+
+    @Getter
     private final Integer power;
 
     private Skill(String name, Integer power) {
@@ -35,18 +42,6 @@ public final class Skill {
      */
     static Skill fromYamlSkill(YamlSkill yamlSkill) {
         return new Skill(yamlSkill.getName(), yamlSkill.getPower());
-    }
-
-    public String getName() { return name; }
-
-    public Integer getPower() { return power; }
-
-    @Override
-    public String toString() {
-        return "Skill{" +
-            ", name='" + name + '\'' +
-            ", power=" + power +
-            '}';
     }
 
     @Override

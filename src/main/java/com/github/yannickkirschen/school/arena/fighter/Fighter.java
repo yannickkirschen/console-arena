@@ -1,5 +1,8 @@
 package com.github.yannickkirschen.school.arena.fighter;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -27,12 +30,17 @@ import java.util.Random;
  * @see Mode
  * @since 1.0.0
  */
+@ToString
 public final class Fighter {
+    @Getter
     private final String name;
+
+    @Getter
     private final Integer power;
     private final List<Skill> attacks = new LinkedList<>();
     private final List<Skill> defenses = new LinkedList<>();
 
+    @Getter
     private Integer health = 100;
 
     private Fighter(String name, Integer power) {
@@ -71,34 +79,6 @@ public final class Fighter {
     public void reduceHealth(Integer value) { health = health - Math.abs(value); }
 
     /**
-     * Constructs all skills of a specific mode in order to be displayed as a menu for the user. Such as:
-     *
-     * <pre>
-     *     How do you want to attack?
-     *
-     *     0 - Punch (Power: 1)
-     *     1 - Kick (Power: 2)
-     * </pre>
-     * <p>
-     * The user can now select which attack to use.
-     *
-     * @param mode The mode of the skills to display.
-     *
-     * @return All skills of a specific mode as a pretty string.
-     */
-    public String skillsAsString(Mode mode) {
-        StringBuilder sb = new StringBuilder().append("\n").append("How do you want to ").append(mode == Mode.ATTACK ? "attack" : "defend").append("?");
-
-        List<Skill> skills = getSkills(mode);
-        for (int i = 0; i < skills.size(); i++) {
-            Skill skill = skills.get(i);
-            sb.append("\n").append(i).append(" - ").append(skill.getName()).append(" (Power: ").append(skill.getPower()).append(")");
-        }
-
-        return sb.append("\n").toString();
-    }
-
-    /**
      * Selects a random skill of a specific mode.
      *
      * @param mode The mode of the skill to randomly select.
@@ -119,31 +99,14 @@ public final class Fighter {
      */
     public List<Skill> getSkills(Mode mode) {
         if (mode == Mode.ATTACK) {
-
             return attacks;
-        } else if (mode == Mode.DEFENSE) {
-            return defenses;
         }
-        return new LinkedList<>();
+        return defenses;
     }
-
-    public String getName() { return name; }
-
-    public Integer getPower() { return power; }
-
-    public Integer getHealth() { return health; }
 
     private void addAttack(Skill skill) { attacks.add(skill); }
 
     private void addDefense(Skill skill) { defenses.add(skill); }
-
-    @Override
-    public String toString() {
-        return "Fighter{" +
-            ", name='" + name + '\'' +
-            ", power=" + power +
-            '}';
-    }
 
     @Override
     public boolean equals(Object o) {
