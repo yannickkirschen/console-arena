@@ -86,7 +86,8 @@ public final class Arena {
      * @return The skill the user chose.
      */
     private Skill getSkillOfUser(Fighter fighter, Mode mode) {
-        LOGGER.info(fighter.skillsAsString(mode));
+        String fighterSkill = ConsoleUtil.fighterSkillAsString(fighter, mode);
+        LOGGER.info("{}", fighterSkill);
         Skill skill = fighter.getSkills(mode).get(ConsoleUtil.doConsoleInput());
         while (skill == null) {
             LOGGER.info("There was no skill for the specified ID.");
