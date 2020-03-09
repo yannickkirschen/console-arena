@@ -23,7 +23,5 @@ java -jar console-arena-VERSION.jar fighters.yml
 
 ## License
 
-*Copyright (c) 2020, Yannick Kirschen, All rights reserved.*
-
 Licensed under the [MIT License](https://github.com/yannickkirschen/console-arena/blob/master/LICENSE).
 Happy forking :)
