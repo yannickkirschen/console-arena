@@ -145,7 +145,7 @@ in the end (e.g. JAR, EAR, WAR), and how the files in these containers should be
 The key feature of Maven (and, frankly, the reason why everybody uses it), is the use of dependencies. Dependencies
 are JAR-files that have been built from a Maven project and uploaded to a repository.
 The main repository is the [Maven Central Repository](https://mvnrepository.com/repos/central). It contains more than
-1 million artifacts (in 2019). It is also possible to host a private repository which makes Maven very interesting
+5 million artifacts (as of May 2020). It is also possible to host a private repository which makes Maven very interesting
 for enterprise use, where you have code that should not be available in public.
 
 These are the dependencies I use for *ConsoleArena*:
