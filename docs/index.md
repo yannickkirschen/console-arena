@@ -155,13 +155,13 @@ These are the dependencies I use for *ConsoleArena*:
 
 #### Plugins
 
-Maven allows the use of plugins, that get executed when the project is being built. This allows a custom structure of
+Maven allows the use of plugins, that get executed when the project is built. This allows a custom structure of
 the project and an easy adoption to a companies needs.
 
 These are the plugins I use for *ConsoleArena*:
 
-- `org.apache.maven.plugins.maven-shade-plugin` (v3.2.1) -> Copy all dependencies into the JAR-file, making it a standalone application. Otherwise, the dependencies have to be in the classpath.
-- `org.apache.maven.plugins.maven-jar-plugin` (v3.2.0) -> Set the class with the main method, so the JAR can be executed.
+- `org.apache.maven.plugins.maven-shade-plugin`: Copy all dependencies into the JAR-file, making it a standalone application. Otherwise, the dependencies have to be in the classpath.
+- `org.apache.maven.plugins.maven-jar-plugin`: Set the class with the main method, so the JAR can be executed.
 
 ### Design
 
@@ -302,8 +302,6 @@ See also:
 - [Changelog](https://github.com/yannickkirschen/console-arena/blob/master/CHANGELOG.md)
 
 ## Legal
-
-*Copyright (c) 2019, Yannick Kirschen, All rights reserved.*
 
 This project and its documentation are licensed under the [MIT License](https://github.com/yannickkirschen/console-arena/blob/master/LICENSE).
 Happy forking :)
