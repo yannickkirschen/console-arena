@@ -150,8 +150,8 @@ for enterprise use, where you have code that should not be available in public.
 
 These are the dependencies I use for *ConsoleArena*:
 
-- `org.yaml.snakeyaml` (v1.25) -> Parsing YAML files
-- `org.slf4j.slf4j-log4j12` (v1.7.28) -> A popular logging framework
+- `org.yaml.snakeyaml`: Parsing YAML files
+- `org.slf4j.slf4j-log4j12`: A popular logging framework
 
 #### Plugins
 
