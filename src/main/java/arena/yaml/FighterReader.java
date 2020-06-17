@@ -1,34 +1,31 @@
-package com.github.yannickkirschen.school.arena.yaml;
+package arena.yaml;
 
-import com.github.yannickkirschen.school.arena.fighter.YamlFighters;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.io.*;
+
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import arena.fighter.*;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * The {@link FighterReader} allows reading the default YAML file and parsing all fighters.
  *
  * @author Yannick Kirschen
- * @see com.github.yannickkirschen.school.arena.fighter.YamlFighters
- * @see com.github.yannickkirschen.school.arena.fighter.YamlFighter
- * @see com.github.yannickkirschen.school.arena.fighter.YamlSkill
+ * @see YamlFighters
+ * @see YamlFighter
+ * @see YamlSkill
  * @since 1.0.0
  */
+@Log4j2
 public final class FighterReader {
-    private static final Logger LOGGER = LoggerFactory.getLogger(FighterReader.class);
-
-    private FighterReader() {}
+    private FighterReader() {
+    }
 
     /**
      * Parses all fighters from the YAML file.
      *
      * @param args The command line arguments. If the first arguments is set, the fighters will be read from this file.
-     *
      * @return The parsed fighters.
      */
     public static YamlFighters read(String[] args) {
@@ -37,7 +34,7 @@ public final class FighterReader {
             try {
                 inputStream = new FileInputStream(args[1]);
             } catch (FileNotFoundException e) {
-                LOGGER.info("The provided file does not exist. Using default one.");
+                log.info("The provided file does not exist. Using default one.");
                 inputStream = getResourceFile();
             }
         } else {

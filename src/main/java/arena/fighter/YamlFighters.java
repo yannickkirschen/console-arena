@@ -1,9 +1,8 @@
-package com.github.yannickkirschen.school.arena.fighter;
+package arena.fighter;
+
+import java.util.*;
 
 import lombok.Data;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * The {@link YamlFighters} are only used as a transport object to parse all fighters from the YAML file into it.

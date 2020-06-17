@@ -1,4 +1,4 @@
-package com.github.yannickkirschen.school.arena.exception;
+package arena.exception;
 
 /**
  * The {@link NonInteractiveModeException} indicates, that the game is not started in a regular terminal, but in an IDE for example. That means, a user input is

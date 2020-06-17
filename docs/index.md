@@ -47,7 +47,7 @@ documentation by the IHK (Chamber of Commerce and Industry).
 
 ### Prerequisites
 
-- Java (JRE)  \>= 1.8
+- Java (JRE)  \>= 11
 - Terminal
 
 ### Download

@@ -1,4 +1,4 @@
-package com.github.yannickkirschen.school.arena.fighter;
+package arena.fighter;
 
 import lombok.Data;
 

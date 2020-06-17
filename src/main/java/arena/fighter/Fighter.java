@@ -1,12 +1,8 @@
-package com.github.yannickkirschen.school.arena.fighter;
+package arena.fighter;
 
-import lombok.Getter;
-import lombok.ToString;
+import java.util.*;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import lombok.*;
 
 /**
  * A {@link Fighter} represents a character in the console game. A fighter has an unique ID, a unique name, a power, skills and a health.
@@ -52,7 +48,6 @@ public final class Fighter {
      * Constructs a new fighter from a {@link YamlFighter}.
      *
      * @param yamlFighter The fighter read from the YAML file with all fighters to create the fighter from.
-     *
      * @return A new fighter based on the one read from the YAML file.
      */
     public static Fighter fromYamlFighter(YamlFighter yamlFighter) {
@@ -76,13 +71,14 @@ public final class Fighter {
      *
      * @param value The value to reduce the health by. The absolute value is taken.
      */
-    public void reduceHealth(Integer value) { health = health - Math.abs(value); }
+    public void reduceHealth(Integer value) {
+        health = health - Math.abs(value);
+    }
 
     /**
      * Selects a random skill of a specific mode.
      *
      * @param mode The mode of the skill to randomly select.
-     *
      * @return A random skill.
      */
     public Skill getRandomSkill(Mode mode) {
@@ -94,7 +90,6 @@ public final class Fighter {
      * Selects all skill of a specific mode.
      *
      * @param mode The mode to get all the skills to.
-     *
      * @return All skills for a specific mode. An empty list, if <code>mode</code> is <code>null</code>.
      */
     public List<Skill> getSkills(Mode mode) {
@@ -104,18 +99,28 @@ public final class Fighter {
         return defenses;
     }
 
-    private void addAttack(Skill skill) { attacks.add(skill); }
+    private void addAttack(Skill skill) {
+        attacks.add(skill);
+    }
 
-    private void addDefense(Skill skill) { defenses.add(skill); }
+    private void addDefense(Skill skill) {
+        defenses.add(skill);
+    }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) { return true; }
-        if (o == null || getClass() != o.getClass()) { return false; }
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Fighter fighter = (Fighter) o;
         return name.equals(fighter.name);
     }
 
     @Override
-    public int hashCode() { return Objects.hash(name); }
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 }

@@ -1,11 +1,8 @@
-package com.github.yannickkirschen.school.arena.match;
+package arena.match;
 
-import com.github.yannickkirschen.school.arena.ConsoleUtil;
-import com.github.yannickkirschen.school.arena.fighter.Fighter;
-import com.github.yannickkirschen.school.arena.fighter.Mode;
-import com.github.yannickkirschen.school.arena.fighter.Skill;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import arena.ConsoleUtil;
+import arena.fighter.*;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * The {@link Arena} is the place where the actual fight takes place. See {@link #fight(Fighter, Fighter, Mode)} for details.
@@ -16,10 +13,10 @@ import org.slf4j.LoggerFactory;
  * @see Skill
  * @since 1.0.0
  */
+@Log4j2
 public final class Arena {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Arena.class);
-
-    Arena() {}
+    Arena() {
+    }
 
     /**
      * Does the actual fight. The two fighters provided fight against each other by using a simple mathematical formula. The player (one) defines which action
@@ -40,7 +37,6 @@ public final class Arena {
      * @param one               The first player (= the user).
      * @param two               The second player (= the computer).
      * @param modeOfFirstPlayer The mode with which the user wants to attack/defend.
-     *
      * @return The fighter who won the match.
      */
     Fighter fight(Fighter one, Fighter two, Mode modeOfFirstPlayer) {
@@ -61,7 +57,7 @@ public final class Arena {
             skill1 = getSkillOfUser(one, modeOfFirstPlayer);
         }
 
-        LOGGER.info("{} {} with '{}'.", one.getName(), s1, skill1.getName());
+        log.info("{} {} with '{}'.", one.getName(), s1, skill1.getName());
 
         // 3. Calculate result
         int result = skill1.getPower() + one.getPower() - skill2.getPower() - two.getPower();
@@ -82,15 +78,14 @@ public final class Arena {
      *
      * @param fighter The user's fighter.
      * @param mode    The mode of the skill to choose from.
-     *
      * @return The skill the user chose.
      */
     private Skill getSkillOfUser(Fighter fighter, Mode mode) {
         String fighterSkill = ConsoleUtil.fighterSkillAsString(fighter, mode);
-        LOGGER.info("{}", fighterSkill);
+        log.info("{}", fighterSkill);
         Skill skill = fighter.getSkills(mode).get(ConsoleUtil.doConsoleInput());
         while (skill == null) {
-            LOGGER.info("There was no skill for the specified ID.");
+            log.info("There was no skill for the specified ID.");
             skill = fighter.getSkills(mode).get(ConsoleUtil.doConsoleInput());
         }
         return skill;
@@ -102,12 +97,11 @@ public final class Arena {
      * @param fighter The computer's fighter.
      * @param mode    The mode of the skill to choose from.
      * @param s       The string to show based on the mode (attacks/defends): "{} {} with '{}'." (format: name, s, skill name)
-     *
      * @return The skill the computer chose.
      */
     private Skill getSkillOfComputer(Fighter fighter, Mode mode, String s) {
         Skill skill = fighter.getRandomSkill(mode);
-        LOGGER.info("\n\n!!! {} {} with '{}'.", fighter.getName(), s, skill.getName());
+        log.info("\n\n!!! {} {} with '{}'.", fighter.getName(), s, skill.getName());
         return skill;
     }
 }

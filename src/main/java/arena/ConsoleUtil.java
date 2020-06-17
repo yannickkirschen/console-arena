@@ -1,14 +1,11 @@
-package com.github.yannickkirschen.school.arena;
-
-import com.github.yannickkirschen.school.arena.exception.NonInteractiveModeException;
-import com.github.yannickkirschen.school.arena.fighter.Fighter;
-import com.github.yannickkirschen.school.arena.fighter.Mode;
-import com.github.yannickkirschen.school.arena.fighter.Skill;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package arena;
 
 import java.io.Console;
 import java.util.List;
+
+import arena.exception.NonInteractiveModeException;
+import arena.fighter.*;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * The {@link ConsoleUtil} is the central way of handling issues with the console.
@@ -16,11 +13,12 @@ import java.util.List;
  * @author Yannick Kirschen
  * @since 1.0.0
  */
+@Log4j2
 public final class ConsoleUtil {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ConsoleUtil.class);
     private static final Console CONSOLE = System.console();
 
-    private ConsoleUtil() {}
+    private ConsoleUtil() {
+    }
 
     /**
      * Does a console input and casts it to an integer. If the input is 'q', the application quits with a status code of 0.
@@ -38,7 +36,7 @@ public final class ConsoleUtil {
         try {
             return Integer.valueOf(s);
         } catch (NumberFormatException e) {
-            LOGGER.info("Type a number!");
+            log.info("Type a number!");
             return doConsoleInput();
         }
     }
@@ -49,13 +47,17 @@ public final class ConsoleUtil {
      * @throws NonInteractiveModeException If we are in an non-interactive mode.
      */
     static void ensureInteractiveMode() throws NonInteractiveModeException {
-        if (CONSOLE == null) { throw new NonInteractiveModeException(); }
+        if (CONSOLE == null) {
+            throw new NonInteractiveModeException();
+        }
     }
 
     /**
      * Prints an information that the user shall press any key to continue and can press 'q' at any point in the game to quit.
      */
-    static void doInfo() { CONSOLE.readLine("Press any key to continue. You can press 'q' at any point in the game to quit."); }
+    static void doInfo() {
+        CONSOLE.readLine("Press any key to continue. You can press 'q' at any point in the game to quit.");
+    }
 
     /**
      * Constructs all skills of a specific mode in order to be displayed as a menu for the user. Such as:
@@ -70,7 +72,6 @@ public final class ConsoleUtil {
      * The user can now select which attack to use.
      *
      * @param mode The mode of the skills to display.
-     *
      * @return All skills of a specific mode as a pretty string.
      */
     public static String fighterSkillAsString(Fighter fighter, Mode mode) {

@@ -1,16 +1,12 @@
-package com.github.yannickkirschen.school.arena;
+package arena;
 
-import com.github.yannickkirschen.school.arena.exception.NonInteractiveModeException;
-import com.github.yannickkirschen.school.arena.fighter.Fighter;
-import com.github.yannickkirschen.school.arena.fighter.Mode;
-import com.github.yannickkirschen.school.arena.match.Arena;
-import com.github.yannickkirschen.school.arena.match.Match;
-import com.github.yannickkirschen.school.arena.yaml.FighterReader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.*;
 
-import java.util.List;
-import java.util.Random;
+import arena.exception.NonInteractiveModeException;
+import arena.fighter.*;
+import arena.match.*;
+import arena.yaml.FighterReader;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * The entry point of ConsoleArena and the actual game logic. The game runs until one of the players (either the user or the computer) has a health of 0.
@@ -19,20 +15,19 @@ import java.util.Random;
  * @see Fighter
  * @see Mode
  * @see Arena
- * @see com.github.yannickkirschen.school.arena.fighter.Skill
+ * @see Skill
  * @since 1.0.0
  */
+@Log4j2
 public class Main {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
-
     public static void main(String[] args) {
         ensureInteractiveMode();
         List<Fighter> fighters = readFighters(args);
         Fighter player = choosePlayer(fighters);
         Fighter enemy = fighters.get(new Random().nextInt(fighters.size()));
 
-        LOGGER.info("\nYou've gone for player '{}'.", player.getName());
-        LOGGER.info("You are fighting against '{}'.", enemy.getName());
+        log.info("\nYou've gone for player '{}'.", player.getName());
+        log.info("You are fighting against '{}'.", enemy.getName());
         ConsoleUtil.doInfo();
 
         new Match(player, enemy).start();
@@ -45,7 +40,7 @@ public class Main {
         try {
             ConsoleUtil.ensureInteractiveMode();
         } catch (NonInteractiveModeException e) {
-            LOGGER.error("No console: non-interactive mode!");
+            log.error("No console: non-interactive mode!");
             System.exit(-1);
         }
     }
@@ -56,13 +51,12 @@ public class Main {
      * If there are less than two fighters, the application quits with an exit code of -1.
      *
      * @param args The command line arguments.
-     *
      * @return All fighter from the YAML file.
      */
     private static List<Fighter> readFighters(String[] args) {
         List<Fighter> fighters = FighterReader.read(args).asFighters();
         if (fighters.size() < 2) {
-            LOGGER.info("There must be at least 2 fighters.");
+            log.info("There must be at least 2 fighters.");
             System.exit(-1);
         }
         return fighters;
@@ -72,21 +66,20 @@ public class Main {
      * Lets the user choose a player based on a list of fighters.
      *
      * @param fighters The list of fighters to present the user.
-     *
      * @return The chosen fighter.
      */
     private static Fighter choosePlayer(List<Fighter> fighters) {
-        LOGGER.info("Choose a player:");
+        log.info("Choose a player:");
 
         for (int i = 0; i < fighters.size(); i++) {
             Fighter fighter = fighters.get(i);
-            LOGGER.info("{} - {} (Power: {})", i, fighter.getName(), fighter.getPower());
+            log.info("{} - {} (Power: {})", i, fighter.getName(), fighter.getPower());
         }
-        LOGGER.info("\n");
+        log.info("\n");
 
         Fighter player = fighters.get(ConsoleUtil.doConsoleInput());
         while (player == null) {
-            LOGGER.info("There was no fighter for the specified ID.");
+            log.info("There was no fighter for the specified ID.");
             player = fighters.get(ConsoleUtil.doConsoleInput());
         }
         fighters.remove(player);

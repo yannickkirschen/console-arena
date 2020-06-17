@@ -1,9 +1,8 @@
-package com.github.yannickkirschen.school.arena.fighter;
-
-import lombok.Getter;
-import lombok.ToString;
+package arena.fighter;
 
 import java.util.Objects;
+
+import lombok.*;
 
 /**
  * A {@link Skill} defines a single skill a fighter can have in order to attack or defend. The ID gets generated when reading the YAML file with all fighters.
@@ -37,7 +36,6 @@ public final class Skill {
      * Constructs a new skill from a {@link YamlSkill}.
      *
      * @param yamlSkill The skill read from the YAML file with all fighters to create the fighter from.
-     *
      * @return A new skill based on the one read from the YAML file.
      */
     static Skill fromYamlSkill(YamlSkill yamlSkill) {
@@ -46,12 +44,18 @@ public final class Skill {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) { return true; }
-        if (o == null || getClass() != o.getClass()) { return false; }
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Skill skill = (Skill) o;
         return name.equals(skill.name);
     }
 
     @Override
-    public int hashCode() { return Objects.hash(name); }
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 }

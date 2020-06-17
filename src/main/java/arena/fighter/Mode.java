@@ -1,4 +1,4 @@
-package com.github.yannickkirschen.school.arena.fighter;
+package arena.fighter;
 
 /**
  * A {@link Mode} can say if something is used for an attack or an defense. It may be used for mapping skills to their purpose or setting the current action
