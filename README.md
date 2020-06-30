@@ -2,7 +2,6 @@
 
 ![GitHub Workflow build status badge](https://github.com/yannickkirschen/console-arena/workflows/Maven%20clean%20install/badge.svg)
 ![GitHub Workflow build status badge](https://github.com/yannickkirschen/console-arena/workflows/Maven%20test/badge.svg)
-[![](https://api.dependabot.com/badges/status?host=github&repo=yannickkirschen/console-arena)](https://dependabot.com)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/yannickkirschen/console-arena/graphs/commit-activity)
 [![GitHub license](https://img.shields.io/github/license/yannickkirschen/console-arena.svg)](https://github.com/yannickkirschen/console-arena/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/yannickkirschen/console-arena.svg)](https://github.com/yannickkirschen/console-arena/releases/)
