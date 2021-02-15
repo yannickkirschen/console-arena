@@ -21,7 +21,7 @@
         <yaml.version>1.27</yaml.version>
         <log4j.version>2.14.0</log4j.version>
         <lombok.version>1.18.18</lombok.version>
-        <junit.version>4.13.1</junit.version>
+        <junit.version>4.13.2</junit.version>
         <maven.jar.plugin.version>3.2.0</maven.jar.plugin.version>
         <maven.shade.plugin.version>3.2.4</maven.shade.plugin.version>
     </properties>
